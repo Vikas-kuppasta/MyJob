@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 const Navbar = ({Login,SetLogin}) => {
     const user = false;
     return (
-        <main className=' px-3 py-3 bg-gray-50 flex justify-between items-center'>
+        <main className='sticky top-0 bg-white z-9 px-3 py-3 border-b border-solid border-gray-300 flex justify-between items-center'>
             <div className='text-black font-medium text-4xl'>My<span className='text-blue-400 '>Job</span></div>
             <div className='flex gap-8'>
 
