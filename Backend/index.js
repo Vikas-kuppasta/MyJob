@@ -3,13 +3,17 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectedDb from './utils/DB.js';
+import userRoute from './routes/userroute.js'
+import CompanyRoute from './routes/companyroute.js'
+import jobRoute from './routes/jobroute.js'
+import ApplicationRoute from './routes/applicationroute.js'
 dotenv.config({});
 
 const app = express();
 const PORT =process.env.PORT ||5000;
 const corsOptions = {
-    origin:'http//localhost:5173',
-    Credentials:true,
+    origin:'http://localhost:5173',
+    credentials:true,
 }
 
 
@@ -18,8 +22,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(cors(corsOptions))
+// 
 
-
+app.use('/user',userRoute),
+app.use('/user/Company',CompanyRoute),
+app.use('/user/job',jobRoute),
+app.use('/user/application',ApplicationRoute),
 
 
 app.listen(PORT, () =>{ 

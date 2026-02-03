@@ -1,23 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import { Routes, Route } from 'react-router-dom'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import Navbar from './components/sharedComponents/Navbar'
 import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
-import Herosection from './pages/Herosection'
-
+import { Route,Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Footer from './pages/Footer'
+import Jobs from './pages/jobs'
 function App() {
-const [Login,SetLogin] = useState(false);
+
 
   return (
     <>
-    {Login && (
-      <Signup Login={Login} SetLogin={SetLogin}/>
-    )}
-      <Navbar Login={Login} SetLogin={SetLogin} />
-      <Herosection/>
+    
+  <Navbar  />
+    <Routes>
+      <Route path='' element={<Home/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/jobs' element={<Jobs/>}/>
+    </Routes>
+  <Footer/>
+
       
 
 

@@ -1,37 +1,61 @@
-
 import React, { useState } from 'react'
-
-const Signup = ({Login,SetLogin}) => {
-  const [Signup, SetSignup] = useState(false);
+import { Link, useNavigate } from 'react-router-dom'
+import { USER_API_END_POINT } from '@/constants/constant'
+import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '@/redux/authslice'
+import { Loader2 } from 'lucide-react'
+const Signup = () => {
+  const dispatch = useDispatch();
+  const {loading} = useSelector(store=>store.auth);
   const [input , setInput] = useState({
     email:"",
     password:"",
-    name:""
+    firstname:"",
+    role:""
   })
 
   const onChangehandler = (e)=>{
     setInput({...input,[e.target.name]:e.target.value})
   }
 
-  const handle = (e) => {
+  const navigate = useNavigate();
+
+  const handle = async(e) => {
     e.preventDefault();
-    console.log(input);
-    SetLogin(!Login);
-    alert('Signes')
+
+    try {
+      dispatch(setLoading(true));
+      const res = await axios.post(`${USER_API_END_POINT}/register`,input,{
+       
+        withCredentials:true,
+      });
+      if(res.data.success){
+        navigate("/login");
+        alert("signed");
+      }
+    } catch (error) {
+       alert(error.response?.data?.message || "Signup failed");
+        console.log(error);
+             
+    }
+    finally{
+      dispatch(setLoading(false));
+    }
     
   }
   return (
     <>
-      <main onClick={()=>SetLogin(!Login)} className='z-9 fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center bg-black/70'>
-        <form onSubmit={handle} onClick={(e) => e.stopPropagation()} className='p-4 flex flex-col gap-4  items-center bg-white shadow-blue-300 shadow-lg rounded-md w-120'>
-          <div className='text-black text-3xl font-medium'>{Signup ? "Sign" : "Log"}<span className='text-blue-500'>{Signup ? " Up" : "In"}</span></div>
-          {Signup && (
+      <main  className=' flex justify-center items-center mt-5 mb-5'>
+        <form onSubmit={handle}  className='p-4 flex flex-col gap-4  items-center bg-white shadow-blue-300 shadow-lg rounded-md w-120'>
+          <div className='text-black text-3xl font-medium'>Sign<span className='text-blue-500'>Up</span></div>
+          
 
             <div className='flex flex-col w-full'>
               <label htmlFor="Name">Full Name</label>
-              <input required name='name' value={input.name} onChange={onChangehandler} type="text" id='Name' placeholder='Your Name' className='p-1  border-2 border-solid border-blue-200 outline-blue-400 rounded-sm placeholder:text-gray-300' />
+              <input required name='firstname' value={input.firstname} onChange={onChangehandler} type="text" id='Name' placeholder='Your Name' className='p-1  border-2 border-solid border-blue-200 outline-blue-400 rounded-sm placeholder:text-gray-300' />
             </div>
-          )}
+          
           <div className='flex flex-col w-full'>
             <label htmlFor="Email">Email</label>
             <input required name='email' value={input.email} onChange={onChangehandler} type="email" id='Email' placeholder='Your Email' className='p-1  border-2 border-solid border-blue-200 outline-blue-400 rounded-sm placeholder:text-gray-300' />
@@ -43,18 +67,20 @@ const Signup = ({Login,SetLogin}) => {
 
           <div className='flex gap-4 self-start'>
             <section className='flex items-center gap-2'>
-              <input id='Student' type="radio" />
+              <input required name='role'   checked={input.role === "student"} value='student' onChange={onChangehandler} id='Student' type="radio" />
               <label htmlFor='Student'>Student</label>
             </section>
             <section className='flex items-center gap-2'>
-              <input id='Recruiter' type="radio" />
+              <input required name='role'   checked={input.role === "recruiter"} value='recruiter' onChange={onChangehandler} id='Recruiter' type="radio" />
               <label htmlFor='Recruiter'>Recruiter</label>
             </section>
           </div>
+        {
+          loading?<button className='bg-blue-600 hover:bg-blue-700 p-2 cursor-pointer text-white w-full rounded-md flex justify-center items-center '> <Loader2 className='mr-2 h-4 w-4 animate-spin'/>Please wait</button>: <button type='submit' className='bg-blue-600 hover:bg-blue-700 p-2 cursor-pointer text-white w-full rounded-md'>Sign Up</button>
+        }
+          {/* <button type='submit' className='bg-blue-600 hover:bg-blue-700 p-2 cursor-pointer text-white w-full rounded-md'>Sign Up</button> */}
 
-          <button type='submit' className='bg-blue-600 hover:bg-blue-700 p-2 cursor-pointer text-white w-full rounded-md'>{Signup ? "Sign Up" : "LogIn"}</button>
-
-          <p className='self-start'>{Signup ? "Already have an account ? " : "Don't have an account ? "} <span onClick={() => SetSignup(!Signup)} className='text-blue-600 cursor-pointer'>{Signup ? "Login" : "Sign Up"}</span> </p>
+          <p className='self-start'>Already have an account ? <Link to='/login'><span  className='text-blue-600 cursor-pointer'>Login</span></Link></p>
 
         </form>
       </main>
