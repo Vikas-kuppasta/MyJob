@@ -8,6 +8,7 @@ import { Route,Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Footer from './pages/Footer'
 import Jobs from './pages/jobs'
+import Profile from './pages/profile'
 function App() {
 
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/jobs' element={<Jobs/>}/>
+      <Route path='profile' element={<Profile/>}/>
     </Routes>
   <Footer/>
 

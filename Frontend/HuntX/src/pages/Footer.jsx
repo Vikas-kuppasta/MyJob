@@ -5,7 +5,7 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
 <>
-      <footer className="bg-gray-50 text-black pt-14 pb-8 px-6">
+      <footer className="bg-white  border-t-1 border-gray-300 border-solid text-black pt-14 pb-8 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* ================= Top Section ================= */}
