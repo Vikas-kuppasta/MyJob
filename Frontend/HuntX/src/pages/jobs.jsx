@@ -1,14 +1,14 @@
 import React from 'react'
 import Filter from '../components/smallComponents/filtersection'
-import Job from '../components/smallComponents/job'
+import { Outlet } from 'react-router-dom'
 const jobs = () => {
   return (
 <>
-    <main className='flex'>
+    <main className='flex w-full'>
         {/* filter section */}
         <Filter/>
         {/* Jobs section */}
-        <Job/>
+        <Outlet />
     </main>
 </>
   )

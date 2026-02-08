@@ -9,6 +9,8 @@ import Home from './pages/Home'
 import Footer from './pages/Footer'
 import Jobs from './pages/jobs'
 import Profile from './pages/profile'
+import Job from '../src/components/smallComponents/job'
+import JobDescription from './pages/JobDescription'
 function App() {
 
 
@@ -20,8 +22,13 @@ function App() {
       <Route path='' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
-      <Route path='/jobs' element={<Jobs/>}/>
       <Route path='profile' element={<Profile/>}/>
+
+      <Route path='/jobs' element={<Jobs/>}>
+        <Route index element={<Job/>}/>
+        <Route path='description/:id' element={<JobDescription/>}/>
+      </Route>
+      
     </Routes>
   <Footer/>
 

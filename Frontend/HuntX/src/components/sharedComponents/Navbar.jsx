@@ -12,7 +12,7 @@ const Navbar = () => {
     // const user = false;
     const {user} = useSelector(store=>store.auth);
     return (
-        <main className='sticky top-0 bg-white z-6 px-3 py-2 border-b border-solid border-gray-300 flex justify-between items-center'>
+        <main className='sticky  top-0 bg-white z-6 px-3 py-2 border-b border-solid border-gray-300 flex justify-between items-center'>
 
             <Link to='' > <img src={logo} className='w-40' alt="" /> </Link>
             <div className='flex items-center gap-8'>
@@ -25,7 +25,7 @@ const Navbar = () => {
 
 
                 {!user ? (
-                    <div className='flex gap-3 items-center'>
+                    <div className='flex  gap-3 items-center'>
                         
                         <button onClick={()=>{navigate("/login");window.scrollTo(0,0)}} className='p-2 px-4 cursor-pointer  text-black rounded-md border border-solid'>Login</button>
                         <button onClick={()=>{navigate("/signup");window.scrollTo(0,0)}} className='p-2 px-4 cursor-pointer  text-white rounded-md bg-blue-500'>SignUp</button>

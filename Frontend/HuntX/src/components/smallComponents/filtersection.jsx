@@ -17,7 +17,7 @@ const filtersection = () => {
     ]
   return (
 <>
-    <main className='w-50 py-4  flex flex-col gap-3   '>
+    <main className='w-40 py-4 border-r flex flex-col gap-3   '>
         <h1 className='text-3xl ml-4 text-black font-semibold ' >Filters</h1>
         <div className='border-t-2  border-gray-200 w-full border-solid  flex flex-col  '>
             {

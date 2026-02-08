@@ -25,7 +25,7 @@ const profile = () => {
   };
   return (
 <>
-    <main className='flex flex-col gap-2 justify-center items-center py-5 '>
+    <main className='flex flex-col gap-2 items-center py-5 '>
 
       <div className=' w-full max-w-4xl    border border-solid rounded-md border-gray-300'>
         {/* <------------------------userBanner code start---------------------> */}
@@ -61,9 +61,9 @@ const profile = () => {
 
       </div>
 
-        <div className='  rounded-md border p-2  w-full max-w-4xl'>
-          <h1 className='text-2xl font-semibold'>Applied Jobs</h1>
-          <div className='  mt-2 rounded-sm border   w-full max-w-4xl'>
+        <div className='  rounded-md border   w-full max-w-4xl'>
+          <h1 className='text-2xl font-semibold m-2'>Applied Jobs</h1>
+          <div className='  mt-2  w-full max-w-4xl'>
               <AppliedJobTable/>
           </div>
         </div>
