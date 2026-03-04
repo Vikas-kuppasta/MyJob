@@ -103,3 +103,51 @@ export const logout = async(req,res)=>{
     }
 };
 
+export const updateProfile = async (req, res) => {
+    try {
+        const { firstname, bio, email, skills } = req.body;
+        const userId = req.id;
+
+        
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                success: false
+            });
+        }
+
+        
+        if (firstname) user.firstname = firstname;
+        if (email) user.email = email;
+        if (bio) user.profile.bio = bio;
+
+        if (skills) {
+            const skillsArray = skills.split(",");
+            user.profile.skills = skillsArray;
+        }
+
+        await user.save();
+
+        
+        return res.status(200).json({
+            message: "Profile successfully updated",
+            user: {
+                _id: user._id,
+                firstname: user.firstname,
+                email: user.email,
+                profile: user.profile
+            },
+            success: true
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Server error",
+            success: false
+        });
+    }
+};
+

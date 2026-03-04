@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from '@/redux/authslice';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -35,10 +36,10 @@ const Login = () => {
         if(res.data.success){
           dispatch(setUser(res.data.user));
           navigate("/");
-          alert("signed");
+          toast("Logged In successfully");
         }
       } catch (error) {
-        alert(error.response?.data?.message || "login failed");
+        toast.error(error.response?.data?.message || "login failed");
         console.log(error);
       }
       finally{

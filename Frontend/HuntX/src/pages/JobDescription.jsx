@@ -28,7 +28,7 @@ const JobDescription = () => {
                 </div>
             </div>
             <Button className="rounded-full bg-blue-600 cursor-pointer hover:bg-blue-700" >Apply Now</Button>
-          </div>
+        </div>
 
           <div className='flex gap-3 justify-between py-4  border-t border-t-blue-400 mt-2'>
                 <div className='w-1/2 bg-white shadow-xl rounded-xl px-4 py-2 flex flex-col gap-4' > 

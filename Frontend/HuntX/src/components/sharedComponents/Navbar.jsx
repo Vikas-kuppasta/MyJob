@@ -2,15 +2,33 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo1.png'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IoPersonSharp } from "react-icons/io5";
 import { TbLogout } from "react-icons/tb";
-
+import {toast} from "sonner"
+import axios from 'axios'
+import { USER_API_END_POINT } from '@/constants/constant'
+import { setUser } from '@/redux/authslice'
 const Navbar = () => {
     const[open,setopen] = useState(false);
     const navigate = useNavigate();
-    // const user = false;
+    const dispatch =  useDispatch();
+    
     const {user} = useSelector(store=>store.auth);
+    const logOutHandler = async()=>{
+        try {
+        const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
+        if(res.data.success){
+            dispatch(setUser(null));
+            navigate('');
+            toast.success(res.data.message);
+        }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message);
+            
+        }
+    }
     return (
         <main className='sticky  top-0 bg-white z-6 px-3 py-2 border-b border-solid border-gray-300 flex justify-between items-center'>
 
@@ -47,12 +65,12 @@ const Navbar = () => {
 
                         <div className='flex gap-3 items-center'>
                             <IoPersonSharp className='h-5 w-5'/>
-                            <p>view profile</p>
+                            <p className='cursor-pointer' onClick={()=>navigate('/profile')}>view profile</p>
                         </div>
 
                         <div className='flex gap-3 items-center'>
                             <TbLogout className='h-5 w-5'/>
-                            <p>Logout</p>
+                            <p onClick={logOutHandler} className='cursor-pointer'>Logout</p>
                         </div>
 
 

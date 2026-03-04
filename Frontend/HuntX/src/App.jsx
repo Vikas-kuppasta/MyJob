@@ -11,6 +11,7 @@ import Jobs from './pages/jobs'
 import Profile from './pages/profile'
 import Job from '../src/components/smallComponents/job'
 import JobDescription from './pages/JobDescription'
+import { Toaster } from './components/ui/sonner'
 function App() {
 
 
@@ -30,6 +31,7 @@ function App() {
       </Route>
       
     </Routes>
+    <Toaster position="top-center" />
   <Footer/>
 
       

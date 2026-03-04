@@ -5,11 +5,18 @@ import { useRef } from 'react';
 import defaultLogo from "../../public/Defaultuserlogo.png"
 import { useState } from 'react';
 import AppliedJobTable from '@/components/smallComponents/AppliedJobTable';
+import { MdEmail } from "react-icons/md";
+import { Badge } from '@/components/ui/badge';
+import UpdateProfile from '@/components/smallComponents/UpdateProfile';
+import { useSelector } from 'react-redux';
+const skills =[1,2,3,4];
 const profile = () => {
+  const [open , setOpen] = useState(false);
   const fileref = useRef(null);
   const userLogo = useRef(null);
-  const [image , setImage] = useState(banner)
-  const [Logoimage , setLogoImage] = useState(defaultLogo)
+  const [image , setImage] = useState(banner);
+  const [Logoimage , setLogoImage] = useState(defaultLogo);
+  const {user} = useSelector(store=>store.auth);
 
   const handleImageChange = (e) => {
    const file = e.target.files[0];
@@ -52,11 +59,31 @@ const profile = () => {
 
       </div>
 
+        <div className='flex justify-between p-2 '>
 
-        <div className='h-20  px-4'>
-          <h1 className='text-xl font-semibold'>Jon Doe</h1>
-          <p> Bio
-          </p>
+         <div className=' flex flex-col gap-3  w-fit px-4'>
+          <div>
+           <h1 className='text-xl font-semibold'>{user?.firstname}</h1>
+           <p>{user?.profile?.bio}</p>
+          </div>
+
+          <div className='flex gap-2 items-center'>
+            <MdEmail className='text-blue-600 w-5 h-5'/>
+            <p>{user?.email}</p>
+          </div>
+
+          <div>
+            <h3 className='text-lg font-semibold '>Skills</h3>
+            <div className='flex gap-2  flex-wrap w-100 mt-1'>
+              {
+                user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-600 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
+              }
+            </div>
+          </div>
+         </div>
+         <button onClick={()=>(setOpen(!open))} className='w-fit h-fit cursor-pointer p-2 rounded-full bg-gray-100 text-blue-400'>
+          <LuPencil className='w-6 h-6'/>
+         </button>
         </div>
 
       </div>
@@ -67,6 +94,8 @@ const profile = () => {
               <AppliedJobTable/>
           </div>
         </div>
+
+        <UpdateProfile open={open} setOpen={setOpen}/>
     </main>
 </>
   )

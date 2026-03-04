@@ -18,6 +18,10 @@ const userSchema =  new mongoose.Schema({
         type:String,
         enum:['student','recruiter'],
         required:true,
+    },
+    profile:{
+        bio:{type:String},
+        skills:[{type:String}]
     }
 },{timestamps:true})
 
