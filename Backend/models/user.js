@@ -21,7 +21,11 @@ const userSchema =  new mongoose.Schema({
     },
     profile:{
         bio:{type:String},
-        skills:[{type:String}]
+        skills:[{type:String}],
+        resume:{type:String},
+        resumeOriginalname:{type:String},
+        profilePhoto:{type:String,default:""},
+        profileBanner:{type:String,default:""}
     }
 },{timestamps:true})
 

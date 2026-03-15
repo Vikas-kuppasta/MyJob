@@ -8,28 +8,54 @@ import AppliedJobTable from '@/components/smallComponents/AppliedJobTable';
 import { MdEmail } from "react-icons/md";
 import { Badge } from '@/components/ui/badge';
 import UpdateProfile from '@/components/smallComponents/UpdateProfile';
-import { useSelector } from 'react-redux';
-const skills =[1,2,3,4];
+import { useDispatch, useSelector } from 'react-redux';
+import { USER_API_END_POINT } from '@/constants/constant';
+import { setUser } from '@/redux/authslice';
+import { toast } from 'sonner';
+import axios from 'axios';
+
 const profile = () => {
   const [open , setOpen] = useState(false);
   const fileref = useRef(null);
   const userLogo = useRef(null);
-  const [image , setImage] = useState(banner);
-  const [Logoimage , setLogoImage] = useState(defaultLogo);
   const {user} = useSelector(store=>store.auth);
+  const dispatch = useDispatch();
+  
+  const[input,setInput] = useState({
+    profile:user?.profile?.profilePhoto || "" ,
+    banner:user?.profile?.profileBanner || "",
+  });
 
-  const handleImageChange = (e) => {
-   const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
+  const image = input.banner|| banner;
+  const Logoimage = input.profile || defaultLogo;
+
+  const handleImageChange = async(e) => {
+    const name = e.target.name;
+    const file = e.target.files?.[0];
+    setInput({...input,[name]:file});
+    try {
+      const formData = new FormData();
+      formData.append(name,file);
+      const res = await axios.post(`${USER_API_END_POINT}/profile/update/image`,formData,{
+        headers:{
+          "Content-Type":"multipart/form-data",
+        },
+        withCredentials:true
+      });
+
+      
+      if(res.data.success){
+        dispatch(setUser(res.data.user));
+        toast("Profile updated successfully")
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
-  const handleUserLogoImageChange = (e) => {
-   const file = e.target.files[0];
-    if (file) {
-      setLogoImage(URL.createObjectURL(file));
-    }
-  };
+  
+
+
+
   return (
 <>
     <main className='flex flex-col gap-2 items-center py-5 '>
@@ -41,7 +67,7 @@ const profile = () => {
            <button onClick={()=>fileref.current.click()} className='bg-white/90 cursor-pointer absolute top-2 right-2 w-10 h-10 flex justify-center items-center rounded-full  '>
             <LuPencil className='w-8 h-7 text-blue-500'/>
            </button>
-           <input type="file"  onChange={handleImageChange}
+           <input type="file" name='banner' onChange={handleImageChange}
           accept="image/*" ref={fileref} className='hidden'  />
 
           {/* <--------------------------userBanner code end-----------------------> */}
@@ -52,7 +78,7 @@ const profile = () => {
           <button onClick={()=>userLogo.current.click()} className='bg-white/90 cursor-pointer absolute top-10 left-10  w-10 h-10 hidden group-hover:flex justify-center items-center rounded-full  transition-all duration-200  '>
             <LuPencil className='w-8 h-7 text-gray-500'/>
           </button>
-          <input type="file"  onChange={handleUserLogoImageChange}
+          <input type="file" name='profile'  onChange={handleImageChange}
           accept="image/*" ref={userLogo} className='hidden'  />
         </div>
         {/* <-----------------------userlogo code end-----------------------> */}

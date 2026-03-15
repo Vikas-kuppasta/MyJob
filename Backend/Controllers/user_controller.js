@@ -1,6 +1,7 @@
 import {User} from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { uploadToCloudinary } from '../utils/helper.js';
 
 export const register = async(req,res)=>{
     try {
@@ -82,7 +83,8 @@ export const login  = async(req,res)=>{
                 _id:user._id,
                 firstname:user.firstname,
                 email:user.email,
-                role:user.role
+                role:user.role,
+                profile:user.profile
 
             },
             success:true
@@ -150,4 +152,56 @@ export const updateProfile = async (req, res) => {
         });
     }
 };
+export const updateProfileImages = async(req,res)=>{
+    try {
+        const userId = req.id;
+        const profile = req.files?.profile?.[0];
+        const banner = req.files?.banner?.[0];
+        
+        let profileUrl="";
+        let bannerUrl="";
 
+        if(profile){
+            const result = await uploadToCloudinary(
+                profile.buffer,
+                "Profile-images"
+            );
+            profileUrl = result.secure_url;
+        }
+        if(banner){
+            const result = await uploadToCloudinary(
+                banner.buffer,
+                "Banner-images"
+            );
+            bannerUrl = result.secure_url;
+        }
+
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({
+                message:"User not found",
+                success:false
+            });
+        }
+        if(profileUrl){
+            user.profile.profilePhoto = profileUrl;
+        }
+        if(bannerUrl){
+            user.profile.profileBanner = bannerUrl;
+        }
+
+        await user.save();
+        
+        res.status(200).json({
+            message:"Image updated successfully",
+            user,
+            success:true,
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Server error",
+            success: false
+        });
+    }
+}

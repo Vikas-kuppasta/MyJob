@@ -1,8 +1,11 @@
 import {Job} from '../models/jobmodel.js';
+import { uploadToCloudinary } from '../utils/helper.js';
 
 export const postjob = async(req,res)=>{
 try {
-    const {title,description,requirements,salary,location,jobtype,experience,position,companyId}=req.body; 
+    const {title,description,requirements,salary,location,jobtype,experience,position,companyId,}=req.body; 
+    const companyLogo = req.files?.companyLogo?.[0];
+    const companyBanner = req.files?.companyBanner?.[0];
     const userId = req.id;
     if(!title||!description||!requirements||!salary||!location||!jobtype||!experience||!position||!companyId){
         return res.status(404).json({
@@ -11,15 +14,32 @@ try {
         })
     };
 
+    let companyLogoUrl ="";
+    let companyBannerUrl ="";
+
+    if(companyLogo){
+        const result = await uploadToCloudinary(companyLogo.buffer,"CompanyLogo-images");
+        companyLogoUrl = result.secure_url;
+    };
+    if(companyBanner){
+        const result = await uploadToCloudinary(companyBanner.buffer,"CompanyBanner-images");
+        companyBannerUrl = result.secure_url;
+    };
+
+
     const job = await Job.create({
         title,
         description,
-        requirements:requirements.split(","),
+        requirements:requirements.split(",").map(r=>r.trim()),
         salary:Number(salary),
         location,
         jobtype,
-        experience,
+        experience:Number(experience),
         position,
+        companyProfile:{
+            companyLogo:companyLogoUrl,
+            companyBanner: companyBannerUrl,
+        },
         company:companyId,
         created_by:userId,
     })
