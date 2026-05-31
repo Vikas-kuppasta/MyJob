@@ -3,27 +3,14 @@ import { uploadToCloudinary } from '../utils/helper.js';
 
 export const postjob = async(req,res)=>{
 try {
-    const {title,description,requirements,salary,location,jobtype,experience,position,companyId,}=req.body; 
-    const companyLogo = req.files?.companyLogo?.[0];
-    const companyBanner = req.files?.companyBanner?.[0];
+    
+    const {title,description,requirements,salary,location,jobtype,experience,workmode,companyId,email}=req.body; 
     const userId = req.id;
-    if(!title||!description||!requirements||!salary||!location||!jobtype||!experience||!position||!companyId){
+    if(!title||!description||!requirements||!salary||!location||!jobtype||!experience||!workmode||!companyId){
         return res.status(404).json({
             message:"Something is missing",
             success:false
         })
-    };
-
-    let companyLogoUrl ="";
-    let companyBannerUrl ="";
-
-    if(companyLogo){
-        const result = await uploadToCloudinary(companyLogo.buffer,"CompanyLogo-images");
-        companyLogoUrl = result.secure_url;
-    };
-    if(companyBanner){
-        const result = await uploadToCloudinary(companyBanner.buffer,"CompanyBanner-images");
-        companyBannerUrl = result.secure_url;
     };
 
 
@@ -35,11 +22,8 @@ try {
         location,
         jobtype,
         experience:Number(experience),
-        position,
-        companyProfile:{
-            companyLogo:companyLogoUrl,
-            companyBanner: companyBannerUrl,
-        },
+        email,
+        workmode,
         company:companyId,
         created_by:userId,
     })
@@ -57,13 +41,44 @@ try {
 
 export const getAlljobs = async(req,res)=>{
     try {
-        const keyword = req.query.keyword || "";
-        const query = {
-            $or:[
-                {title:{$regex:keyword,$options:"i"}},
-                {description:{$regex:keyword,$options:"i"}},
-            ]
-        };
+        const{location,jobtype,minSalary,maxSalary,keyword}=req.query;
+        const query = {};
+        if(keyword){
+
+            query.$or = [
+                {
+                    title:{
+                        $regex:keyword,
+                        $options:"i"
+                    }
+                },
+                {
+                    description:{
+                        $regex:keyword,
+                        $options:"i"
+                    }
+                }
+            ];
+        }
+
+        // location filter
+        if(location){
+            query.location = location;
+        }
+
+        // jobtype filter
+        if(jobtype){
+            query.jobtype = jobtype;
+        }
+
+        // salary range filter
+        if(minSalary && maxSalary){
+
+            query.salary = {
+                $gte:Number(minSalary),
+                $lte:Number(maxSalary)
+            };
+        }
         const jobs = await Job.find(query).populate({
             path:"company"
         }).sort({createdAt:-1});
@@ -86,7 +101,9 @@ export const getAlljobs = async(req,res)=>{
 export const getjobById = async(req,res)=>{
 try {
     const jobId = req.params.id;
-    const job = await Job.findById(jobId);
+    const job = await Job.findById(jobId).populate({
+        path:"application",
+    }).populate("company");
     if(!job){
         return res.status(404).json({
             message:"job not found",
@@ -102,13 +119,12 @@ try {
     
 }
 
-
 };
 
 export const getJobsAdmin = async(req,res)=>{
     try {
         const adminId = req.id;
-        const jobs = Job.find({created_by:adminId});
+        const jobs =await Job.find({created_by:adminId}).populate({path:"application"}).populate("company");
         if(!jobs){
             return res.status(404).json({
                 message:"job not found",

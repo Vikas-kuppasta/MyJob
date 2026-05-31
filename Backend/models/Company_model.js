@@ -7,12 +7,39 @@ const companySchema = new mongoose.Schema({
     },
     description:{
         type:String,
+        required:true,
     },
     location:{
         type:String,
+        required:true,
+    },
+    industry:{
+        type:String,
+        required:true,
+    },
+    companySize:{
+        type:String
+    },
+    foundedYear:{
+        type:String
+    },
+    state:{
+        type:String,
+        required:true,
+    },
+    email:{
+        type:String
     },
     website:{
         type:String,
+    },
+    companyProfile:{
+        companyLogo:{
+                    type:String,
+                },
+        companyBanner:{
+                    type:String,
+                }
     },
     userId:{
         type:mongoose.Schema.Types.ObjectId,

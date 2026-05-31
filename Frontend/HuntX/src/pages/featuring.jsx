@@ -5,9 +5,9 @@ import FeaturedCard from '../components/sharedComponents/featuredCard'
 const featuring = () => {
   return (
 <>
-    <main className='grid grid-cols-2 '>
+    <main className='grid-cols-1 grid lg:grid-cols-2 '>
         {featuredCards.map((card)=>(
-            <div key={card.id} className={`px-14 py-10 ${card.bgcolor}`}>
+            <div key={card.id} className={`max-sm:px-5 px-14 py-10 ${card.bgcolor}`}>
                 <FeaturedCard card={card}/>
             </div>
         ))}

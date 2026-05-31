@@ -47,7 +47,7 @@ const Signup = () => {
   }
   return (
     <>
-      <main  className=' flex justify-center items-center mt-5 mb-5'>
+      <main  className='max-sm:p-3 flex justify-center items-center mt-5 mb-5'>
         <form onSubmit={handle}  className='p-4 flex flex-col gap-4  items-center bg-white shadow-blue-300 shadow-lg rounded-md w-120'>
           <div className='text-black text-3xl font-medium'>Sign<span className='text-blue-500'>Up</span></div>
           

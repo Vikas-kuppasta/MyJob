@@ -13,8 +13,13 @@ import { USER_API_END_POINT } from '@/constants/constant';
 import { setUser } from '@/redux/authslice';
 import { toast } from 'sonner';
 import axios from 'axios';
+import useGetAppliedJobs from '@/hooks/useGetAppliedJobs';
+
 
 const profile = () => {
+  useGetAppliedJobs();
+  const {appliedJobs} = useSelector(store=>store.application);
+  console.log(appliedJobs);
   const [open , setOpen] = useState(false);
   const fileref = useRef(null);
   const userLogo = useRef(null);
@@ -57,10 +62,10 @@ const profile = () => {
 
 
   return (
-<>
-    <main className='flex flex-col gap-2 items-center py-5 '>
+<>    
+    <div className='flex flex-col md:max-w-lg lg:max-w-3xl xl:max-w-4xl  mx-auto  gap-2 items-center py-5 '>
 
-      <div className=' w-full max-w-4xl    border border-solid rounded-md border-gray-300'>
+      <div className=' w-full  bg-white   border border-solid rounded-md border-gray-300'>
         {/* <------------------------userBanner code start---------------------> */}
         <div className='h-46 w-full relative '> 
           <img className='w-full h-37 rounded-tl-md rounded-tr-md  object-cover' src={image}/>
@@ -100,7 +105,7 @@ const profile = () => {
 
           <div>
             <h3 className='text-lg font-semibold '>Skills</h3>
-            <div className='flex gap-2  flex-wrap w-100 mt-1'>
+            <div className='flex gap-2  flex-wrap md:w-100 mt-1'>
               {
                 user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-600 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
               }
@@ -114,15 +119,16 @@ const profile = () => {
 
       </div>
 
-        <div className='  rounded-md border   w-full max-w-4xl'>
-          <h1 className='text-2xl font-semibold m-2'>Applied Jobs</h1>
-          <div className='  mt-2  w-full max-w-4xl'>
-              <AppliedJobTable/>
+        <div className='  rounded-md border  p-3 w-full bg-white max-w-4xl'>
+          <h1 className='text-2xl font-semibold mb-4'>Applied Jobs</h1>
+          <div className='  mt-2 border rounded-md  w-full max-w-4xl'>
+              <AppliedJobTable appliedJobs={appliedJobs}/>
           </div>
         </div>
 
         <UpdateProfile open={open} setOpen={setOpen}/>
-    </main>
+    </div>
+    
 </>
   )
 }

@@ -1,15 +1,31 @@
 import {Company} from '../models/Company_model.js';
 import mongoose from 'mongoose';
+import { uploadToCloudinary } from '../utils/helper.js';
 
 export const registerCompany = async(req,res)=>{
 try {
-    const {companyname} = req.body;
-    if(!companyname){
+    const {companyname,description,website,location,city,state,foundedYear,industry,email,companySize} = req.body;
+    const companyLogo = req.files?.companyLogo?.[0];
+    const companyBanner = req.files?.companyBanner?.[0];
+    if(!companyname||!description||!location||!state||!industry){
         return res.status(400).json({
-            message:"Company name is required",
+            message:"Something is missing",
             success:false
         });
     };
+
+    let companyLogoUrl ="";
+    let companyBannerUrl ="";
+    
+        if(companyLogo){
+            const result = await uploadToCloudinary(companyLogo.buffer,"CompanyLogo-images");
+            companyLogoUrl = result.secure_url;
+        };
+        if(companyBanner){
+            const result = await uploadToCloudinary(companyBanner.buffer,"CompanyBanner-images");
+            companyBannerUrl = result.secure_url;
+        };
+
     let company = await Company.findOne({name:companyname});
     if(company){
         return res.status(400).json({
@@ -20,6 +36,18 @@ try {
 
     company =await Company.create({
         name:companyname,
+        description:description,
+        website:website,
+        location:location,
+        companyProfile:{
+            companyLogo:companyLogoUrl,
+            companyBanner:companyBannerUrl
+        },
+        industry:industry,
+        state:state,
+        foundedYear:foundedYear,
+        companySize:companySize,
+        email:email,
         userId:req.id
     });
 
@@ -36,24 +64,71 @@ try {
 };
 
 export const getCompany  = async(req,res)=>{
-    try {
+        try {
+
         const userId = req.id;
-        const companies = await Company.find({userId});
-        if(!companies){
-            return res.status(404).json({
-                message:"Companies not found",
-                success:false
-            })
-        };
+
+        const companies = await Company.aggregate([
+            {
+                $match: {
+                    userId: new mongoose.Types.ObjectId(userId)
+                }
+            },
+
+            {
+                $lookup: {
+                    from: "jobs",
+                    localField: "_id",
+                    foreignField: "company",
+                    as: "jobs"
+                }
+            },
+
+            {
+                $addFields: {
+                    jobsCount: { $size: "$jobs" }
+                }
+            },
+
+            {
+                $project: {
+                    jobs: 0
+                }
+            }
+        ]);
 
         return res.status(200).json({
             companies,
-            success:true
-        })
+            success: true
+        });
 
     } catch (error) {
         console.log(error);
-    };
+
+        return res.status(500).json({
+            message: "Server error",
+            success: false
+        });
+    }
+            
+    // try {
+    //     const userId = req.id;
+    //     const companies = await Company.find({userId});
+    //     if(!companies){
+    //         return res.status(404).json({
+    //             message:"Companies not found",
+    //             success:false
+    //         })
+    //     };
+
+    //     return res.status(200).json({
+    //         companies,
+    //         success:true
+    //     })
+
+    // } catch (error) {
+    //     console.log(error);
+    // };
 };
 
 export const getCompanyId = async(req,res)=>{

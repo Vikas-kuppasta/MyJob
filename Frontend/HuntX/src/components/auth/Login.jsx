@@ -35,7 +35,12 @@ const Login = () => {
         });
         if(res.data.success){
           dispatch(setUser(res.data.user));
-          navigate("/");
+          if(res.data.user.role == "recruiter"){
+            navigate("/adminDashboard")
+          }else{
+            navigate('/');
+          }
+          
           toast("Logged In successfully");
         }
       } catch (error) {
@@ -49,7 +54,7 @@ const Login = () => {
   return (
 
 <>
-       <main  className=' mt-5 mb-5 flex justify-center items-center'>
+       <main  className=' mt-5 mb-5 max-sm:p-3 flex justify-center items-center'>
         <form onSubmit={handle} onClick={(e) => e.stopPropagation()} className='p-4 flex flex-col gap-4  items-center bg-white shadow-blue-300 shadow-lg rounded-md w-120'>
           <div className='text-black text-3xl font-medium'>Log<span className='text-blue-500'>In</span></div>
           

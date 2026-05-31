@@ -15,22 +15,22 @@ const featuredCard = ({card}) => {
     <main className='flex flex-col gap-10'>
         <Title text={card.title} subtitle={card.subtitle}/>
 
-        <div className='flex flex-col h-70 gap-4'>
+        <div className='flex flex-col xl:h-70 gap-4'>
             <div className='flex gap-6  '>
-                <Icon1 className='text-5xl text-white bg-blue-300 p-2 rounded-full' />
-                <p className='w-120'>{card.title1}</p>
+                <Icon1 className='max-md:text-4xl text-5xl text-white bg-blue-300 p-2 rounded-full' />
+                <p className='max-md:w-55 lg:w-80 xl:w-120 '>{card.title1}</p>
             </div>
             <div className='flex gap-6   '>
-                <Icon2 className='text-5xl text-white bg-blue-300 p-2 rounded-full' />
-                <p className='w-120'>{card.title2}</p>
+                <Icon2 className='max-md:text-4xl text-5xl text-white bg-blue-300 p-2 rounded-full' />
+                <p className='max-md:w-55 lg:w-80 xl:w-120 '>{card.title2}</p>
             </div>
             <div className='flex gap-6   '>
-                <Icon3 className='text-5xl text-white bg-blue-300 p-2 rounded-full' />
-                <p className='w-120'>{card.title3}</p>
+                <Icon3 className='max-md:text-4xl text-5xl text-white bg-blue-300 p-2 rounded-full' />
+                <p className='max-md:w-55 lg:w-80 xl:w-120'>{card.title3}</p>
             </div>
             <div className='flex gap-6'>
-                <Icon4 className='text-5xl text-white bg-blue-300 p-2 rounded-full' />
-                <p className='w-120'>{card.title4}</p>
+                <Icon4 className='max-md:text-4xl text-5xl text-white bg-blue-300 p-2 rounded-full' />
+                <p className='max-md:w-55 lg:w-80 xl:w-120'>{card.title4}</p>
             </div>
             
         </div>

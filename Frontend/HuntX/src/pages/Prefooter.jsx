@@ -4,11 +4,11 @@ const Prefooter = () => {
   return (
     <>
        <main className="bg-gray-50 py-16 px-6">
-      <div className="max-w-7xl mx-auto space-y-20">
+      <div className="md:max-w-7xl mx-auto space-y-20">
 
         {/* ================= Section 1: Why Choose Us ================= */}
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center md:max-w-3xl mx-auto">
+          <h2 className="text-4xl max-sm:text-3xl font-bold text-gray-900 mb-4">
             Why Choose us ?
           </h2>
           <p className="text-gray-600 mb-10">
@@ -25,10 +25,10 @@ const Prefooter = () => {
             ].map((point, index) => (
               <li
                 key={index}
-                className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm"
+                className="flex  items-center gap-3 bg-white p-4 rounded-xl shadow-sm"
               >
                 <span className=" h-2 w-2 rounded-full bg-indigo-600"></span>
-                <span className="text-gray-700">{point}</span>
+                <span className="max-sm:w-55 text-gray-700">{point}</span>
               </li>
             ))}
           </ul>

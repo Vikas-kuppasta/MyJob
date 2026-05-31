@@ -26,7 +26,7 @@ const jobSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    position:{
+    email:{
         type:String,
         required:true,
     },
@@ -34,14 +34,11 @@ const jobSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    companyProfile:{
-        companyLogo:{
-            type:String,
-        },
-        companyBanner:{
-            type:String,
-        }
+    workmode:{
+        type:String,
+        required:true
     },
+    
     company:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Company',
@@ -55,7 +52,7 @@ const jobSchema = new mongoose.Schema({
     application:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:'application',
+            ref:'Application',
         }
     ]
 },{timestamps:true});

@@ -5,7 +5,7 @@ import { upload } from '../middlewares/multer.js';
 
 const router =  express.Router();
 
-router.route("/post").post(isAuthentificated,upload,postjob);
+router.route("/post").post(isAuthentificated,postjob);
 router.route("/get").get(isAuthentificated,getAlljobs);
 router.route("/get/:id").get(isAuthentificated,getjobById);
 router.route("/getadminjobs").get(isAuthentificated,getJobsAdmin);
