@@ -27,7 +27,7 @@ const UserSavedJobs = () => {
   });
   return (
     <>
-      <main className='w-full p-4 h-screen'>
+      <main className='w-full max-sm:p-1 p-4  min-h-screen'>
 
         <div>
           <h2 className='text-4xl font-semibold'>Saved Jobs</h2>
@@ -39,7 +39,7 @@ const UserSavedJobs = () => {
           <input onChange={(e)=>setSearch(e.target.value)} value={search} className='w-full outline-none' type="text" placeholder='Search saved jobs...' />
         </div>
 
-        <div className='  p-6 w-full max-w-6xl mx-auto h-fit border-l-gray-200 border-solid   grid max-md:grid-cols-1 lg:grid-cols-2  gap-4 '>
+        <div className=' max-sm:p-0 p-6 w-full max-w-6xl mx-auto h-fit border-l-gray-200 border-solid   grid max-md:grid-cols-1 lg:grid-cols-2  gap-4 '>
         
         {
           

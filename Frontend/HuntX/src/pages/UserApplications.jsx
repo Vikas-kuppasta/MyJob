@@ -3,6 +3,7 @@ import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 import React, { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
+import MobAppliedJobs from './../components/sharedComponents/mobAppliedBar'
 
 const UserApplications = () => {
   useGetAppliedJobs();
@@ -28,7 +29,7 @@ const UserApplications = () => {
   });
   return (
     <>
-      <main className='h-screen p-4 w-full'>
+      <main className='min-h-screen p-2 md:p-4 w-full'>
         <div>
           <h2 className='text-4xl font-semibold'>Applications</h2>
           <p className='text-gray-400 text-sm'>Track your application status in real time.</p>
@@ -39,12 +40,13 @@ const UserApplications = () => {
           <input onChange={(e)=>(setSearch(e.target.value))} value={search} className='w-full outline-none' type="text" placeholder='Search applied Jobs...' />
         </div>
 
-        <div className=' mx-auto rounded-md border bg-white w-full max-w-5xl'>
+        <div className='max-sm:hidden mx-auto rounded-md border bg-white w-full max-w-5xl'>
           <h1 className='text-2xl m-3 font-semibold mb-4'>Applied Jobs</h1>
           <div className='      w-full'>
             <AppliedJobTable appliedJobs={filteredApplication} />
           </div>
         </div>
+        <MobAppliedJobs appliedJobs={filteredApplication}/>
       </main>
     </>
   )

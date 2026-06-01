@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo1.png'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,11 +16,12 @@ const Navbar = () => {
     
     const navigate = useNavigate();
     const dispatch =  useDispatch();
+    const location = useLocation();
     
     const {user} = useSelector(store=>store.auth);
     
     return (
-        <main className='sticky top-0 bg-white z-6 px-3 py-2 border-b border-solid border-gray-300 flex justify-between items-center'>
+        <main className={`${location.pathname==="/adminDashboard" ? "md:hidden" :null} sticky top-0 bg-white z-6 px-3 py-2  flex justify-between items-center`}>
 
             <Link to='' > <img src={logo} className='max-sm:w-25 w-40' alt="" /> </Link>
             <div className='flex items-center gap-8'>
@@ -30,13 +31,7 @@ const Navbar = () => {
                         <li className='text-black list-none'><Link to='/jobs'>Jobs</Link></li>
                         <li className='text-black list-none'><Link to=''>Browse</Link></li>
                     </ul>
-                    ) : user?.role === "recruiter" ? (
-                        <ul>
-                            <li className='text-black list-none'>
-                            <Link to='/adminDashboard'>Dashboard</Link>
-                            </li>
-                        </ul>
-                ) : null}
+                    ) : null}
 
 
                 {!user ? (

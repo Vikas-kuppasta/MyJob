@@ -2,6 +2,7 @@ import Navbar from '@/components/sharedComponents/Navbar'
 import Footer from '@/pages/Footer'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import MobNavigation from './../components/sharedComponents/mobNavigation'
 
 const Mainlayout = () => {
   return (
@@ -13,6 +14,7 @@ const Mainlayout = () => {
         <Outlet />
       </div>
       <Footer />
+      <MobNavigation/>
     </main>
     </>
   )

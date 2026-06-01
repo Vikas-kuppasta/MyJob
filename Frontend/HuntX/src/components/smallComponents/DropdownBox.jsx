@@ -19,7 +19,7 @@ const DropdownBox = () => {
             const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true});
             if(res.data.success){
                 dispatch(setUser(null));
-                navigate('');
+                navigate('/');
                 toast.success(res.data.message);
             }
             } catch (error) {

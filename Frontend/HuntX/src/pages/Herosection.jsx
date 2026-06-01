@@ -18,7 +18,7 @@ const Herosection = () => {
                     ))}
                 </div>
 
-                <div className='z-1 top-20 absolute opacity-50 blur-[75px] max-sm:bg-black/20  bg-black/25 w-200 h-100'></div>
+                <div className='z-1 top-20 absolute opacity-50 blur-[75px] max-sm:bg-black/25  bg-black/25 w-200 h-100 max-sm:w-100 max-sm:h-60'></div>
 
 
                 <div className=' z-5 rounded-xl max-sm:py-4 p-2 py-9 absolute top-40  max-sm:flex-col max-sm:gap-2 flex justify-between items-center  bg-white/85 lg:w-200'>

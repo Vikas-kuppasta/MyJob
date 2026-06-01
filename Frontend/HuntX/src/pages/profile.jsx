@@ -14,6 +14,7 @@ import { setUser } from '@/redux/authslice';
 import { toast } from 'sonner';
 import axios from 'axios';
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs';
+import MobAppliedJobs from './../components/sharedComponents/mobAppliedBar'
 
 
 const profile = () => {
@@ -119,12 +120,13 @@ const profile = () => {
 
       </div>
 
-        <div className='  rounded-md border  p-3 w-full bg-white max-w-4xl'>
+        <div className=' max-sm:hidden rounded-md border  p-3 w-full bg-white max-w-4xl'>
           <h1 className='text-2xl font-semibold mb-4'>Applied Jobs</h1>
           <div className='  mt-2 border rounded-md  w-full max-w-4xl'>
               <AppliedJobTable appliedJobs={appliedJobs}/>
           </div>
         </div>
+              <MobAppliedJobs appliedJobs={appliedJobs}/>
 
         <UpdateProfile open={open} setOpen={setOpen}/>
     </div>

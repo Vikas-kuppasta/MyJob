@@ -63,7 +63,7 @@ const AppSidebar = () => {
 
             <SidebarMenuItem>
               <Link to="/adminDashboard">
-              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard" ? "bg-blue-100 " : "bg-none" } text-md text-blue-500 hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
+              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard" ? "bg-blue-100 text-blue-500  " : "text-gray-500" } text-md  hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
                 <BiSolidDashboard className="mr-2 h-4 w-4" />
                   Dashboard
               </SidebarMenuButton>
@@ -81,7 +81,7 @@ const AppSidebar = () => {
 
             <SidebarMenuItem>
               <Link to="mycompanies">
-              <SidebarMenuButton className={`text-md text-gray-500 hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
+              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard/mycompanies" ? "bg-blue-100 text-blue-500  " : "text-gray-500" } text-md  hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
                 <BiBuilding className="mr-2 h-4 w-4" />
                 My Companies
               </SidebarMenuButton>
@@ -90,7 +90,7 @@ const AppSidebar = () => {
 
             <SidebarMenuItem>
               <Link to="postcompany" >
-              <SidebarMenuButton className={`text-md text-gray-500 hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
+              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard/postcompany" ? "bg-blue-100 text-blue-500  " : "text-gray-500" } text-md  hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
                 <BiPlus className="mr-2 h-4 w-4" />
                 Post New Company
               </SidebarMenuButton>
@@ -108,7 +108,7 @@ const AppSidebar = () => {
 
             <SidebarMenuItem>
               <Link to='myjobs'>
-              <SidebarMenuButton className={`text-md text-gray-500 hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
+              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard/myjobs" ? "bg-blue-100 text-blue-500  " : "text-gray-500" } text-md  hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
                 <BiBriefcase className="mr-2 h-4 w-4" />
                 My Job Postings
               </SidebarMenuButton>
@@ -117,7 +117,7 @@ const AppSidebar = () => {
 
             <SidebarMenuItem>
               <Link to="postjob">
-              <SidebarMenuButton className={`text-md text-gray-500 hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
+              <SidebarMenuButton className={`${location.pathname ==="/adminDashboard/postjob" ? "bg-blue-100 text-blue-500  " : "text-gray-500" } text-md  hover:bg-blue-100 hover:text-blue-600 hover:font-semibold`}>
                 <BiPlus className="mr-2 h-4 w-4" />
                 Post New Job
               </SidebarMenuButton>

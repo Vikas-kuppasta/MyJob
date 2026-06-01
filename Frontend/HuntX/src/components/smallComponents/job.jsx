@@ -40,7 +40,7 @@ const job = () => {
       <BiSearch className='ml-3 text-gray-400 w-6 h-6'/>
       <input onChange={(e)=>(setInput(e.target.value))} value={input}className=' w-full p-2 outline-none  placeholder:text-gray-400 placeholder:text-sm   ' placeholder='Search jobs...' type="text" name="" id="" />
     </div>
-    <div className='  p-6 w-full max-w-6xl mx-auto h-fit border-l-gray-200 border-solid   grid max-md:grid-cols-1 lg:grid-cols-2  gap-4 '>
+    <div className=' max-sm:p-3 p-6 w-full max-w-6xl mx-auto h-fit border-l-gray-200 border-solid   grid max-md:grid-cols-1 lg:grid-cols-2  gap-4 '>
         
         {
           

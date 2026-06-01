@@ -19,7 +19,7 @@ const DashboardHome = () => {
   console.log("user:",user);
   return (
     <>
-    <main className='p-4 bg-blue-100/30 h-screen'>
+    <main className='p-4 bg-blue-100/30 min-h-screen'>
 
       <div className='flex justify-between items-center'>
 
@@ -31,7 +31,7 @@ const DashboardHome = () => {
           </div>
         </div>
 
-        <div className='flex gap-3 items-center'>
+        <div className='max-sm:hidden flex gap-3 items-center'>
           <Button onClick={()=>navigate("postcompany")} className="bg-white text-gray-600">
             <BiBuilding className='mr-2 h-4 w-4'/>
             Add Company
@@ -45,18 +45,18 @@ const DashboardHome = () => {
 
       </div>
 
-      <div className='h-full mx-18  p-4  '>
-        <div className='grid grid-cols-3 gap-3'>
+      <div className=' h-full md:mx-18  p-4  '>
+        <div className='max-sm:hidden grid  grid-cols-3 gap-3'>
         <Reveal>
 
-          <div className='bg-white rounded-md p-4'>
+          <div className='bg-white  rounded-md p-4'>
             <BiBuilding className='h-8 w-8 p-[3px] bg-blue-100 rounded-md text-blue-600'/>
             <p className='text-gray-500 text-[12px] my-2'>Total Companies</p>
             <p className='text-3xl font-semibold'>3</p>
           </div>
         </Reveal>
 
-          <div className='bg-white rounded-md p-4'>
+          <div className='bg-white  rounded-md p-4'>
             <BiBriefcase className='h-8 w-8 p-[3px] bg-green-100 rounded-md text-green-600'/>
             <p className='text-gray-500 text-[12px] my-2'>Active Job Postings</p>
             <p className='text-3xl font-semibold'>3</p>
@@ -72,10 +72,10 @@ const DashboardHome = () => {
 
         {/* job posting and my companies container */}
 
-        <div className=' mt-4  flex gap-2 '>
+        <div className=' mt-4 max-sm:flex-col  flex gap-2 '>
 
           {/* recent job table */}
-            <div className='bg-white w-1/2  rounded-md '>
+            <div className='bg-white md:w-1/2  rounded-md '>
 
               <div className='flex justify-between items-center p-3 border-b'>
                 <h1 className='font-semibold'>Recent Job Postings</h1>
@@ -105,7 +105,7 @@ const DashboardHome = () => {
             </div>
 
             {/* my companies table  */}
-            <div className='bg-white w-1/2 h-fit rounded-md '>
+            <div className='bg-white md:w-1/2 h-fit rounded-md '>
                 <div className='flex justify-between items-center p-3 border-b'>
                 <h1 className='font-semibold'>My Companies</h1>
                 <span onClick={()=>navigate("mycompanies")} className='text-blue-500 flex items-center cursor-pointer text-[12px]'>View all <BiRightArrowAlt className='ml-2 h-4 w-4'/></span>

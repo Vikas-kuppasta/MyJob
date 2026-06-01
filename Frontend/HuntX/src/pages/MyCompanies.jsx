@@ -20,7 +20,7 @@ const MyCompanies = () => {
           </div>
         </div>
 
-        <div className='mt-3 grid grid-cols-2 gap-3'>
+        <div className='mt-3 max-sm:grid-cols-1 grid grid-cols-2 gap-3'>
             {
               Companies?.map((company,index)=>(
                 <CompanyCard key={index} company={company} />
