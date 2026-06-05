@@ -15,7 +15,7 @@ const jobs = () => {
   
   return (
 <>
-    <div className='relative max-sm:hidden '>
+    <div className='relative hidden '>
       <img className='' src={jbanner} alt="" />
       <h1 className='absolute top-6 left-6 font-semibold text-4xl flex'>Find the right job,<p className='font-semibold text-4xl text-blue-400'>faster.</p></h1>
     </div>
