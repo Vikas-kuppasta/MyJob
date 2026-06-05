@@ -1,7 +1,7 @@
 import {Company} from '../models/Company_model.js';
 import mongoose from 'mongoose';
 import { uploadToCloudinary } from '../utils/helper.js';
-
+import {Job} from './../models/jobmodel.js'
 export const registerCompany = async(req,res)=>{
 try {
     const {companyname,description,website,location,city,state,foundedYear,industry,email,companySize} = req.body;
@@ -111,24 +111,7 @@ export const getCompany  = async(req,res)=>{
         });
     }
             
-    // try {
-    //     const userId = req.id;
-    //     const companies = await Company.find({userId});
-    //     if(!companies){
-    //         return res.status(404).json({
-    //             message:"Companies not found",
-    //             success:false
-    //         })
-    //     };
-
-    //     return res.status(200).json({
-    //         companies,
-    //         success:true
-    //     })
-
-    // } catch (error) {
-    //     console.log(error);
-    // };
+    
 };
 
 export const getCompanyId = async(req,res)=>{
@@ -154,8 +137,28 @@ export const getCompanyId = async(req,res)=>{
 
 export const updateCompany = async(req,res)=>{
     try {
-        const {name,website,location,description} = req.body;
-        const updateData = {name,website,location,description};
+        const {companyname,description,website,location,city,state,foundedYear,industry,email,companySize} = req.body;
+        const companyLogo = req.files?.companyLogo?.[0];
+        const companyBanner = req.files?.companyBanner?.[0]; 
+        let companyLogoUrl ="";
+        let companyBannerUrl ="";
+    
+        if(companyLogo){
+            const result = await uploadToCloudinary(companyLogo.buffer,"CompanyLogo-images");
+            companyLogoUrl = result.secure_url;
+        };
+        if(companyBanner){
+            const result = await uploadToCloudinary(companyBanner.buffer,"CompanyBanner-images");
+            companyBannerUrl = result.secure_url;
+        };
+        const company = await Company.findById(req.params.id);
+
+        const updateData = {name:companyname,description,website,location,city,state,foundedYear,industry,email,companySize,companyProfile: {
+    companyLogo:
+      companyLogoUrl || company.companyProfile.companyLogo,
+    companyBanner:
+      companyBannerUrl || company.companyProfile.companyBanner,
+  },};
         const updatedCompany = await Company.findByIdAndUpdate(req.params.id,updateData,{new:true});
         if(!updatedCompany){
             return res.status(404).json({
@@ -172,4 +175,63 @@ export const updateCompany = async(req,res)=>{
         console.log(error);
         
     }
-}
+};
+
+export const deleteCompany  = async(req,res) => {
+    try{
+        const userId = req.id;
+        const companyId = req.params.id;
+
+        if(!userId || !companyId){
+            return res.status(404).json({
+                message:"Something went wrong",
+                success:false
+            });
+        };
+        const deletedCompany = await Company.findOneAndDelete({
+                _id:companyId,
+                userId:userId,
+            });
+
+            if(!deletedCompany){
+                return res.status(404).json({
+                    message:"Company not found or unauthorized",
+                    success:false
+                })
+            };
+
+            return res.status(200).json({
+                message:"Company deleted successfully",
+                success:true
+            })
+    }catch(error){
+        console.log(error);
+    };
+};
+
+export const JobsByCompany = async(req,res)=>{
+    try {
+        const companyId = req.params.id;
+        if(!companyId){
+            return res.status(400).json({
+                message:"Something went wrong",
+                success:false,
+            })
+        };
+
+        const jobs = await Job.find({company:companyId}).populate("company");
+        if(!jobs){
+            return res.status(400).json({
+                message:"Something went wrong",
+                success:false,
+            })
+        };
+
+        return res.status(200).json({
+            success:true,
+            jobs,
+        })
+    } catch (error) {
+        console.log(error);
+    };
+};

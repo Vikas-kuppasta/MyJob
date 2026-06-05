@@ -6,29 +6,9 @@ import {Link, useNavigate} from 'react-router-dom'
 import { BsWindowSidebar } from 'react-icons/bs';
 import Reveal from '@/components/Animation/Revel';
 import {motion} from 'framer-motion'
+import { containerVariants, itemVariants } from '@/components/Animation/animate';
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.6,
-    },
-  },
-};
 
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 const Forjobseeker = () => {
   const navigate = useNavigate();
   return (
@@ -77,8 +57,10 @@ const Forjobseeker = () => {
           </section>
           </motion.div>
         </div>
-          
+
+          <motion.div variants={itemVariants}>
           <button onClick={()=>{navigate('/signup');window.scrollTo(0,0)}} className='max-sm:px-3 max-sm:py-1 max-sm:mt-3 px-5 py-2 text-white cursor-pointer rounded-xl bg-black w-fit'>Create your profile for free</button>
+          </motion.div>
           
 
       </motion.div>

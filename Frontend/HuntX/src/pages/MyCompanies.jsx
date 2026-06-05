@@ -11,7 +11,7 @@ const MyCompanies = () => {
 
   return (
 <>
-    <main className='p-4 bg-blue-100/30 h-screen overflow-y-scroll'>
+    <main className='p-4 bg-blue-100/30 h-full '>
         <div className='flex  '>
           <SidebarTrigger className="mr-2"/>
           <div>

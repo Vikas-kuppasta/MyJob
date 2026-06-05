@@ -1,13 +1,16 @@
+import JobDropbox from '@/components/smallComponents/JobDropbox'
 import { Button } from '@/components/ui/button'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import useGetAdminJobs from '@/hooks/useGetAdminJobs'
 
 import React from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 
 const MyJobs = () => {
   useGetAdminJobs();
   const {adminJobs} = useSelector(store=>store.job);
+  
 
   
   return (
@@ -48,10 +51,16 @@ const MyJobs = () => {
                               <p className='text-gray-500 text-[12px]'>{jobs?.title} - {jobs?.jobtype}</p>
                             </div>
                           </span>
-        
+                        
+                        <div className='flex items-center gap-2'>
+
                           <Button className="bg-green-100 rounded-full p-3 text-green-500 text-[12px]">
                             Active
                           </Button>
+                          <JobDropbox id={jobs._id}/>
+                          {/* <BsThreeDotsVertical className='cursor-pointer'/> */}
+                        </div>
+                        
                       </div>
                       
                       ))

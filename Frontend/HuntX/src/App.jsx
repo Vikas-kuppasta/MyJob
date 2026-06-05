@@ -22,6 +22,11 @@ import Postjobs from './pages/Postjobs'
 import UserDashboardHome from './pages/UserDashboard'
 import UserApplications from './pages/UserApplications'
 import UserSavedJobs from './pages/UserSavedJobs'
+import Protected from './admin/protected'
+import JobApplicants from './pages/JobApplicants'
+import ViewCompanyJobs from './pages/ViewCompanyJobs'
+import EditCompany from './pages/EditCompany'
+import EditJob from './pages/EditJob'
 function App() {
 
 
@@ -46,13 +51,20 @@ function App() {
       </Route>
     </Route>
 
-      <Route path='/adminDashboard' element={<Dashboard/>}>
+    
+
+      <Route path='/adminDashboard' element={<Protected><Dashboard/></Protected>}>
         <Route index element={<DashboardHome/>}/>
         <Route path='mycompanies' element={<MyCompanies/>}/>
+        <Route path='mycompanies/jobs/:id' element={<ViewCompanyJobs/>}/>
+        <Route path='mycompanies/job/:id' element={<EditCompany/>}/>
         <Route path='postcompany' element={<PostCompany/>}/>
         <Route path='myjobs' element={<MyJobs/>}/>
+        <Route path='myjobs/:id' element={<EditJob/>}/>
         <Route path='postjob' element={<Postjobs/>}/>
+        <Route path='myjobs/applicants/:id' element={<JobApplicants/>}/>
       </Route>
+    
       
     </Routes>
     <Toaster position="top-center" />

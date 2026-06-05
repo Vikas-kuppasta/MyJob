@@ -15,8 +15,14 @@ const DashboardHome = () => {
   const {adminJobs} = useSelector(store=>store.job);
   const {Companies} = useSelector(store=>store.company);
   const {user} = useSelector(store=>store.auth);
-  console.log("Companies:",Companies);
-  console.log("user:",user);
+  
+
+  let totalApplicants=0;
+  adminJobs.map((job,_)=>{
+    const applicants = job?.application?.length;
+    totalApplicants = totalApplicants + applicants;
+  });
+
   return (
     <>
     <main className='p-4 bg-blue-100/30 min-h-screen'>
@@ -47,25 +53,25 @@ const DashboardHome = () => {
 
       <div className=' h-full md:mx-18  p-4  '>
         <div className='max-sm:hidden grid  grid-cols-3 gap-3'>
-        <Reveal>
+        
 
           <div className='bg-white  rounded-md p-4'>
             <BiBuilding className='h-8 w-8 p-[3px] bg-blue-100 rounded-md text-blue-600'/>
             <p className='text-gray-500 text-[12px] my-2'>Total Companies</p>
-            <p className='text-3xl font-semibold'>3</p>
+            <p className='text-3xl font-semibold'>{Companies?.length}</p>
           </div>
-        </Reveal>
+        
 
           <div className='bg-white  rounded-md p-4'>
             <BiBriefcase className='h-8 w-8 p-[3px] bg-green-100 rounded-md text-green-600'/>
             <p className='text-gray-500 text-[12px] my-2'>Active Job Postings</p>
-            <p className='text-3xl font-semibold'>3</p>
+            <p className='text-3xl font-semibold'>{adminJobs?.length}</p>
           </div>
 
           <div className='bg-white rounded-md p-4'>
             <BiUser className='h-8 w-8 p-[3px] bg-orange-100 rounded-md text-orange-600'/>
-            <p className='text-gray-500 text-[12px] my-2'>Total Companies</p>
-            <p className='text-3xl font-semibold'>3</p>
+            <p className='text-gray-500 text-[12px] my-2'>Total Applicants</p>
+            <p className='text-3xl font-semibold'>{totalApplicants}</p>
           </div>
 
         </div>
@@ -95,7 +101,7 @@ const DashboardHome = () => {
                     </div>
                   </span>
 
-                  <Button className="bg-green-100 rounded-full p-3 text-green-500 text-[12px]">
+                  <Button className=" bg-green-100 rounded-full p-3 text-green-500 text-[12px]">
                     Active
                   </Button>
               </div>

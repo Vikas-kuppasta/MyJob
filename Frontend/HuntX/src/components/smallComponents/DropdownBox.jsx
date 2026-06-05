@@ -30,7 +30,7 @@ const DropdownBox = () => {
         }
   return (
     <>
-    <DropdownMenu>
+    <DropdownMenu >
         <DropdownMenuTrigger className="outline-none">
              <div className='w-10 h-10 overflow-hidden cursor-pointer rounded-full'>
           {
@@ -62,8 +62,14 @@ const DropdownBox = () => {
                                                         <p>{user?.firstname}</p>
                                             </div>
                 </DropdownMenuLabel>
-                <DropdownMenuItem onClick={()=>{navigate("/profile")}} ><IoPersonSharp/> Profile</DropdownMenuItem>
-                <DropdownMenuItem onClick={logOutHandler} ><TbLogout/> logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={()=>{
+                    if(user.role==="student"){
+                        navigate("/profile");
+                    }else{
+                        navigate("/adminDashboard");
+                    }
+                }} ><IoPersonSharp/> Profile</DropdownMenuItem>
+                <DropdownMenuItem  onClick={logOutHandler} ><TbLogout/> logout</DropdownMenuItem>
             </DropdownMenuGroup>
         </DropdownMenuContent>
     </DropdownMenu>

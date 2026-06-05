@@ -69,7 +69,7 @@ const Signup = () => {
           <div className='flex gap-4 self-start'>
             <section className='flex items-center gap-2'>
               <input required name='role'   checked={input.role === "student"} value='student' onChange={onChangehandler} id='Student' type="radio" />
-              <label htmlFor='Student'>Student</label>
+              <label htmlFor='Student'>Candidate</label>
             </section>
             <section className='flex items-center gap-2'>
               <input required name='role'   checked={input.role === "recruiter"} value='recruiter' onChange={onChangehandler} id='Recruiter' type="radio" />

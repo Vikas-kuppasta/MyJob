@@ -1,60 +1,50 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { ALLJOB_API_END_POINT } from '@/constants/constant'
-import axios from 'axios'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ALLJOB_API_END_POINT } from '@/constants/constant';
+import axios from 'axios';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { toast } from 'sonner'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import { toast } from 'sonner';
 
-const Postjobs = () => {
-  const {Companies} = useSelector(store=>store.company);
-  
-  const [input,setInput]  = useState({
-    title:"",
-    description:"",
-    requirements:"",
-    salary:"",
-    location:"",
-    jobtype:"",
-    experience:"",
-    workmode:"",
-    email:"",
-    companyId:""
-  });
-
-
-  const handler = (e)=>{
-    setInput({...input,[e.target.name]:e.target.value});
-  }
-
-  const submitHandler = async(e)=>{
-    e.preventDefault();
-    try {
-      const res = await axios.post(`${ALLJOB_API_END_POINT}/post`,input,{
-        withCredentials:true
+const EditJob = () => {
+    const {id} = useParams();
+    const {adminJobs} = useSelector(store=>store.job);
+    const {Companies} = useSelector(store=>store.company);
+    const job = adminJobs.find((j)=>(j._id===id));
+    const [input,setInput]  = useState({
+        title:job?.title || "",
+        description:job?.description || "",
+        requirements: job?.requirements?.join(", ") || "",
+        salary:job?.salary || "",
+        location:job?.location||"",
+        jobtype:job?.jobtype || "",
+        experience:job?.experience ||"",
+        workmode:job?.workmode||"",
+        email:job?.email || "",
+        companyId:job?.company?._id||""
       });
-      if(res.data.success){
-        toast.success(res.data.message);
+    const handler = (e)=>{
+    setInput({...input,[e.target.name]:e.target.value});
+  };
+
+
+    const submitHandler = async(e)=>{
+        e.preventDefault();
+        try {
+          const res = await axios.put(`${ALLJOB_API_END_POINT}/update/${id}`,input,{
+            withCredentials:true
+          });
+          if(res.data.success){
+            toast.success(res.data.message);
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data.message);
+        }
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
-    }
-  }
   return (
-    <main className='p-4 bg-blue-100/30 h-300 overflow-scroll'>
-            <div className='flex  mb-3 '>
-              <SidebarTrigger className="mr-2"/>
-              <div>
-                <h3 className='font-semibold text-xl '>Post New Job</h3>
-                <p className='text-gray-400 text-[12px]'>Fill in the details to publish a new job opening</p>
-              </div>
-            </div>
-    
-            {/* ///////// */}
-    
-            
-          <div className="w-full  max-w-5xl bg-white p-8 rounded-2xl shadow-lg h-fit mx-auto my-auto">
+<>
+    <div className="w-full  max-w-5xl bg-white p-8 rounded-2xl shadow-lg h-fit mx-auto my-auto">
             
             {/* Title */}
             <h1 className="text-2xl  font-bold  mb-8">
@@ -75,6 +65,7 @@ const Postjobs = () => {
                   <input
                     onChange={handler}
                     name='title'
+                    value={input.title}
                     type="text"
                     placeholder="Enter job title"
                     className="w-full p-2 rounded-lg placeholder:text-gray-500 border border-gray-500 focus:outline-none focus:border-blue-500"
@@ -89,14 +80,11 @@ const Postjobs = () => {
                 
 
                   <Select  onValueChange={(value)=>{
-                    const company = Companies.find((c)=>(c._id===value));
+                    
                     setInput((prev) => ({
                     ...prev,
                     companyId: value,
-                    location: company?.location || "",
-                    email: company?.email || "",
-                    jobtype:company?.industry || "",
-                    description: company?.description || "",
+                    
                   }));
                   }}>
                     <SelectTrigger>
@@ -232,6 +220,7 @@ const Postjobs = () => {
                   <input
                     onChange={handler}
                     name="requirements"
+                    value={input.requirements}
                     type="text"
                     placeholder="Enter requirements"
                     className="w-full p-2 rounded-lg placeholder:text-gray-500 border border-gray-500 focus:outline-none focus:border-blue-500"
@@ -244,14 +233,12 @@ const Postjobs = () => {
                 type="submit"
                 className=" bg-blue-600 text-sm hover:bg-blue-700 transition-all text-white py-3 px-5 rounded-lg font-semibold"
               >
-                Submit
+                Save
               </button>
             </form>
           </div>
-        
-            
-        </main>
+</>
   )
 }
 
-export default Postjobs
+export default EditJob

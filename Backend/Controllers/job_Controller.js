@@ -139,4 +139,85 @@ export const getJobsAdmin = async(req,res)=>{
         console.log(error);
         
     }
+};
+
+export const deleteJob  = async(req,res) => {
+    try{
+        const userId = req.id;
+        const jobId = req.params.id;
+
+        if(!userId || !jobId){
+            return res.status(404).json({
+                message:"Something went wrong",
+                success:false
+            });
+        };
+        const deletedJob = await Job.findOneAndDelete({
+                _id:jobId,
+                created_by:userId,
+            });
+
+            if(!deletedJob){
+                return res.status(404).json({
+                    message:"Job not found or unauthorized",
+                    success:false
+                })
+            };
+
+            return res.status(200).json({
+                message:"Job deleted successfully",
+                success:true
+            })
+    }catch(error){
+        console.log(error);
+    };
+
+};
+
+export const updateJob = async(req,res)=>{
+    try {
+         const { title,
+    description,
+    requirements,
+    salary,
+    location,
+    jobtype,
+    experience,
+    workmode,
+    email,
+    companyId} = req.body;
+
+    const jobId = req.params.id;
+
+    const updateData = {title,
+    description,
+    requirements,
+    salary,
+    location,
+    jobtype,
+    experience,
+    workmode,
+    email,
+    company:companyId};
+
+    const updatedJob = await Job.findByIdAndUpdate(jobId,updateData,{new:true});
+
+    if(!updatedJob){
+        return res.status(400).json({
+            message:"Job not found ",
+            success:false
+        })
+    };
+
+    return res.status(200).json({
+        message:"Job updated successfully",
+        success: true,
+    });
+         
+    } catch (error) {
+        console.log(error);
+    }
+   
+
+
 }
