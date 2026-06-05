@@ -1,10 +1,9 @@
-import Reveal from '@/components/Animation/Revel'
 import { Button } from '@/components/ui/button'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import useGetAdminJobs from '@/hooks/useGetAdminJobs'
-import useGetAllCompanies from '@/hooks/UseGetAllCompanies'
+import useGetAllCompanies from '@/hooks/useGetAllCompanies'
 import React from 'react'
-import { BiAlignRight, BiBriefcase, BiBuilding, BiPlus, BiRightArrow, BiRightArrowAlt, BiUser } from 'react-icons/bi'
+import {  BiBriefcase, BiBuilding, BiPlus,  BiRightArrowAlt, BiUser } from 'react-icons/bi'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +13,7 @@ const DashboardHome = () => {
   const navigate  = useNavigate();
   const {adminJobs} = useSelector(store=>store.job);
   const {Companies} = useSelector(store=>store.company);
-  const {user} = useSelector(store=>store.auth);
+  
   
 
   let totalApplicants=0;

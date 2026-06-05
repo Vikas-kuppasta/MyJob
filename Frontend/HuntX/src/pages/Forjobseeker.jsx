@@ -2,8 +2,7 @@ import React from 'react'
 import growth from '../assets/growth2.png'
 import { TbHandClick } from 'react-icons/tb';
 import { BiToggleRight } from 'react-icons/bi';
-import {Link, useNavigate} from 'react-router-dom'
-import { BsWindowSidebar } from 'react-icons/bs';
+import { useNavigate} from 'react-router-dom'
 import Reveal from '@/components/Animation/Revel';
 import {motion} from 'framer-motion'
 import { containerVariants, itemVariants } from '@/components/Animation/animate';

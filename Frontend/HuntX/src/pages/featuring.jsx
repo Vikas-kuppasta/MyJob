@@ -1,5 +1,4 @@
 import React from 'react'
-import Title from '../components/smallComponents/title'
 import {featuredCards} from '../assets/assets'
 import FeaturedCard from '../components/sharedComponents/featuredCard'
 import { motion } from 'framer-motion'

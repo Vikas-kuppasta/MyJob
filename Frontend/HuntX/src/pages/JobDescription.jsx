@@ -58,7 +58,7 @@ const JobDescription = () => {
         
     },[])
 
-   console.log(user._id)
+   
 
   return (
     <main className='w-full '>

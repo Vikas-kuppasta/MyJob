@@ -1,6 +1,5 @@
 import React from 'react'
 import { 
-    SidebarProvider,
     Sidebar,
     SidebarContent,
     SidebarFooter,
@@ -13,13 +12,11 @@ import {
     
 
  } from '../ui/sidebar'
-import { BiBuilding, BiHome, BiPlus, BiSolidDashboard } from 'react-icons/bi'
+import { BiBuilding,  BiPlus, BiSolidDashboard } from 'react-icons/bi'
 import { BiBriefcase } from 'react-icons/bi'
-import { BiUser } from 'react-icons/bi'
 import logo from '../../assets/logo1.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Button } from '../ui/button'
-import { LogOut, LogOutIcon } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { USER_API_END_POINT } from '@/constants/constant'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +27,6 @@ import { toast } from 'sonner'
 
 
 const AppSidebar = () => {
-  const {user} = useSelector(store=>store.auth);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -2,9 +2,7 @@ import JobDropbox from '@/components/smallComponents/JobDropbox'
 import { Button } from '@/components/ui/button'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import useGetAdminJobs from '@/hooks/useGetAdminJobs'
-
 import React from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 
 const MyJobs = () => {

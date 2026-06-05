@@ -1,17 +1,9 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo1.png'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IoPersonSharp } from "react-icons/io5";
-import { TbLogout } from "react-icons/tb";
-import {toast} from "sonner"
-import axios from 'axios'
-import { USER_API_END_POINT } from '@/constants/constant'
-import { setUser } from '@/redux/authslice'
-import { img } from 'framer-motion/client'
 import DropdownBox from '../smallComponents/DropdownBox'
-import { DropdownMenuTrigger } from '../ui/dropdown-menu'
+
 const Navbar = () => {
     
     const navigate = useNavigate();

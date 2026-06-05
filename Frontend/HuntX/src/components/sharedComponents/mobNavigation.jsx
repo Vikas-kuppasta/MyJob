@@ -1,6 +1,5 @@
 import React from 'react'
 import { BiHeart, BiHome } from 'react-icons/bi'
-import { BsFilePerson } from 'react-icons/bs'
 import { MdOutlinePerson } from 'react-icons/md'
 import { PiBagSimpleBold, PiBagSimpleFill } from 'react-icons/pi'
 import { useSelector } from 'react-redux'

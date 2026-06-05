@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiCalendarAlt, BiRightArrow, BiRightArrowAlt } from 'react-icons/bi'
+import { BiCalendarAlt,  BiRightArrowAlt } from 'react-icons/bi'
 import { Badge } from '../ui/badge'
 import {  useLocation, useNavigate } from 'react-router-dom'
 

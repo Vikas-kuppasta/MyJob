@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiBookBookmark, BiSolidDashboard } from 'react-icons/bi'
+import {  BiSolidDashboard } from 'react-icons/bi'
 import { FaRegBookmark } from 'react-icons/fa6'
 import { IoIosListBox } from 'react-icons/io'
 import { useLocation, useNavigate } from 'react-router-dom'

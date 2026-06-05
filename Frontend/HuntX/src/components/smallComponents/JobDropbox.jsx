@@ -1,7 +1,7 @@
 import React from 'react'
-import {DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import {DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,  DropdownMenuTrigger } from '../ui/dropdown-menu';
+import {  BsThreeDotsVertical } from 'react-icons/bs';
+import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ALLJOB_API_END_POINT } from '@/constants/constant';
 import { toast } from 'sonner';

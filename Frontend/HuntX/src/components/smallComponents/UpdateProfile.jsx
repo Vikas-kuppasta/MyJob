@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Dialog,DialogContent, DialogDescription,DialogFooter,DialogHeader,DialogTitle,DialogTrigger,} from '../ui/dialog'
+import {Dialog,DialogContent,DialogFooter,DialogHeader,DialogTitle,} from '../ui/dialog'
 import { Loader2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -42,7 +42,7 @@ const UpdateProfile = ({open,setOpen}) => {
             console.log(error);
         }
         setOpen(!open);
-        console.log(input);
+        
     }
   return (
 <>
