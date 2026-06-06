@@ -21,7 +21,7 @@ const Herosection = () => {
     return (
         <>
         
-            <main className='relative flex  overflow-hidden gap-3 flex-wrap  justify-center   h-140 bg-white'>
+            <main className='relative flex  overflow-hidden gap-3 flex-wrap  justify-center min-h-screen bg-white'>
                 <div className='md:hidden inline-grid md:grid-cols-3 max-sm:grid-cols-2 lg:grid-cols-5  lg:gap-10  '>
                     {animatedCards.slice(0,8).map((card, i) => (
                         <motion.div key={i}

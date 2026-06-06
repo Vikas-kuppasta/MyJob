@@ -24,7 +24,7 @@ const DashboardHome = () => {
 
   return (
     <>
-    <main className='p-4 bg-blue-100/30 min-h-screen'>
+    <main className='p-4 bg-blue-100/30 overflow-hidden h-full'>
 
       <div className='flex justify-between items-center'>
 

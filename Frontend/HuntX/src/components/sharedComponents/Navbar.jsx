@@ -29,8 +29,8 @@ const Navbar = () => {
                 {!user ? (
                     <div className='flex  gap-3 items-center'>
                         
-                        <button onClick={()=>{navigate("/login");window.scrollTo(0,0)}} className='p-2 px-4 max-sm:p-1 max-sm:px-2 cursor-pointer  text-black rounded-md border border-solid max-sm:text-[10px]'>Login</button>
-                        <button onClick={()=>{navigate("/signup");window.scrollTo(0,0)}} className='p-2 px-4 cursor-pointer  text-white rounded-md bg-blue-500 max-sm:p-1 max-sm:px-2 max-sm:text-[10px] '>SignUp</button>
+                        <button onClick={()=>{navigate("/login");window.scrollTo(0,0)}} className='p-2 px-4 max-sm:p-1 max-sm:px-2 cursor-pointer  text-black rounded-md border border-solid max-sm:text-[13px]'>Login</button>
+                        <button onClick={()=>{navigate("/signup");window.scrollTo(0,0)}} className='p-2 px-4 cursor-pointer  text-white rounded-md bg-blue-500 max-sm:p-1 max-sm:px-2 max-sm:text-[13px] '>SignUp</button>
                     </div>
                 ) : (
                     <>
