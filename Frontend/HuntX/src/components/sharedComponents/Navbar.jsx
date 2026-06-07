@@ -15,7 +15,7 @@ const Navbar = () => {
     return (
         <main className={`${location.pathname.startsWith("/adminDashboard") ? "md:hidden" :null} sticky top-0 bg-white z-6 px-3 py-2  flex justify-between items-center`}>
 
-            <Link to='' > <img src={logo} className='max-sm:w-25 w-40' alt="" /> </Link>
+            <Link to='' > <img src={logo} className='max-sm:w-30 w-40' alt="" /> </Link>
             <div className='flex items-center gap-8'>
                 {user?.role === "student" ? (
                     <ul className='flex items-center max-sm:hidden gap-16'>
