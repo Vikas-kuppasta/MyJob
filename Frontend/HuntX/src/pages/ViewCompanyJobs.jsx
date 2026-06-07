@@ -67,7 +67,7 @@ const ViewCompanyJobs = () => {
 
                     <div>
                         <h1 className="text-3xl font-bold">
-                            {companyJobs?.[0].company?.name}
+                            {companyJobs?.[0]?.company?.name || "Company"}
                         </h1>
 
                         <p className="text-muted-foreground mt-2">

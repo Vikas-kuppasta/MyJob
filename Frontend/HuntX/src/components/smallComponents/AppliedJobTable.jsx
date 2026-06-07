@@ -2,6 +2,16 @@ import React from 'react'
 import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow,} from "../ui/table"
 import {Button} from '../ui/button'
 const AppliedJobTable = ({appliedJobs}) => {
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Accepted":
+        return "bg-green-100 text-green-700 border-green-200";
+      case "Rejected":
+        return "bg-red-100 text-red-700 border-red-200";
+      default:
+        return "bg-yellow-100 text-yellow-700 border-yellow-200";
+    }
+  };
   return (
     <div>
   <Table >
@@ -28,7 +38,7 @@ const AppliedJobTable = ({appliedJobs}) => {
                     <h3 className='w-18'>{data?.job?.company?.name}</h3>
                   </div>
                   </TableCell>
-                <TableCell className=""><Button  className=" bg-blue-500 hover:bg-blue-600 text-white" >{data?.status}</Button></TableCell>
+                <TableCell className=""><Button  className={getStatusColor(data?.status)} >{data?.status}</Button></TableCell>
               </TableRow> 
                 </>
             ))
