@@ -27,6 +27,7 @@ import JobApplicants from './pages/JobApplicants'
 import ViewCompanyJobs from './pages/ViewCompanyJobs'
 import EditCompany from './pages/EditCompany'
 import EditJob from './pages/EditJob'
+import ProtectedUser from './admin/ProtectedUser'
 function App() {
 
 
@@ -36,16 +37,16 @@ function App() {
   
   <Routes>
     <Route element={<Mainlayout />}>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<Home /> } />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
-      <Route path='/profile' element={<UserDashboardHome/>}>
+      <Route path='/profile' element={<ProtectedUser><UserDashboardHome/></ProtectedUser> }>
         <Route index element={<Profile/>}/>
         <Route path="applications" element={<UserApplications/>}/>
         <Route path="saved-jobs" element={<UserSavedJobs/>}/>
       </Route>
 
-      <Route path='/jobs' element={<Jobs />}>
+      <Route path='/jobs' element={<ProtectedUser><Jobs /></ProtectedUser> }>
         <Route index element={<Job />} />
         <Route path='description/:id' element={<JobDescription />} />
       </Route>
