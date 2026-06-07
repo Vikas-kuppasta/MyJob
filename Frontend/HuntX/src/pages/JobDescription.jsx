@@ -61,7 +61,7 @@ const JobDescription = () => {
    
 
   return (
-    <main className='w-full '>
+    <main className='w-full min-h-screen '>
 
         <div className='w-full  relative  h-43'>
          <img className='h-35 rounded-md w-full object-cover' src={singleJob?.company?.companyProfile?.companyBanner||banner} alt="" />

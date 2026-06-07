@@ -64,7 +64,7 @@ const profile = () => {
 
   return (
 <>    
-    <div className='flex flex-col md:max-w-lg lg:max-w-3xl xl:max-w-4xl  mx-auto  gap-2 items-center py-5 '>
+    <div className='min-h-screen flex flex-col md:max-w-lg lg:max-w-3xl xl:max-w-4xl  mx-auto  gap-2 items-center py-5 '>
 
       <div className=' w-full  bg-white   border border-solid rounded-md border-gray-300'>
         {/* <------------------------userBanner code start---------------------> */}
