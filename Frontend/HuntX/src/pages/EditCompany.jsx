@@ -222,7 +222,7 @@ const EditCompany = () => {
                 Company Logo 
               </label>
               <input
-                onChange={handleInput}
+                onChange={handleFile}
                 name="companyLogo"
                 value={input.companyLogo}
                 type="file"
@@ -236,7 +236,7 @@ const EditCompany = () => {
                 Company Banner
               </label>
               <input
-                onChange={handleInput}
+                onChange={handleFile}
                 name="companyBanner"
                 type="file"
                 accept='image/*'
