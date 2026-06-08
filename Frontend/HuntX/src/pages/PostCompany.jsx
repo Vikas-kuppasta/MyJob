@@ -244,7 +244,7 @@ const PostCompany = () => {
                 Company Banner
               </label>
               <input
-                onChange={handleInput}
+                onChange={handleFile}
                 name="companyBanner"
                 type="file"
                 accept='image/*'
