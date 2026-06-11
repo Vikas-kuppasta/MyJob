@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
 import './App.css'
-import Navbar from './components/sharedComponents/Navbar'
 import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import { Route,Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import Footer from './pages/Footer'
 import Jobs from './pages/Jobs'
 import Profile from './pages/Profile'
 import Job from './components/smallComponents/Job'

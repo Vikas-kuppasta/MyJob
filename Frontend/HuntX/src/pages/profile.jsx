@@ -20,7 +20,6 @@ import MobAppliedJobs from '../components/sharedComponents/MobAppliedBar'
 const profile = () => {
   useGetAppliedJobs();
   const {appliedJobs} = useSelector(store=>store.application);
-  console.log(appliedJobs);
   const [open , setOpen] = useState(false);
   const fileref = useRef(null);
   const userLogo = useRef(null);
@@ -103,12 +102,12 @@ const profile = () => {
             <MdEmail className='text-blue-600 w-5 h-5'/>
             <p>{user?.email}</p>
           </div>
-
+ 
           <div>
             <h3 className='text-lg font-semibold '>Skills</h3>
             <div className='flex gap-2  flex-wrap md:w-100 mt-1'>
               {
-                user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-50 border-blue-100 text-blue-600 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
+                user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-50 border-blue-100 text-blue-500 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
               }
             </div>
           </div>
