@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import logo from '../../assets/logo1.png'
+// import logo from '../../assets/logo1.png'
+import logo from '/logo1.png'
 import { useDispatch, useSelector } from 'react-redux'
 import DropdownBox from '../smallComponents/DropdownBox'
 

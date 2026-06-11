@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/logo1.png'
+import logo from '/logo1.png'
 import { useNavigate} from 'react-router-dom'
 const Footer = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React from 'react'
 import Herosection from './Herosection'
-import FeaturedSection from './featuring'
+import FeaturedSection from './Featuring'
 import Forjobseeker from './Forjobseeker'
 import ForCompanies from './ForCompanies'
 import Prefooter from './Prefooter'

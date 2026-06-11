@@ -1,6 +1,6 @@
 import React from 'react'
 import {featuredCards} from '../assets/assets'
-import FeaturedCard from '../components/sharedComponents/featuredCard'
+import FeaturedCard from '../components/sharedComponents/FeaturedCard'
 import { motion } from 'framer-motion'
 import { containerVariants, itemVariants } from '@/components/Animation/animate'
 const featuring = () => {

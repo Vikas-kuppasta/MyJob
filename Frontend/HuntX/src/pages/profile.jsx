@@ -14,7 +14,7 @@ import { setUser } from '@/redux/authslice';
 import { toast } from 'sonner';
 import axios from 'axios';
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs';
-import MobAppliedJobs from './../components/sharedComponents/mobAppliedBar'
+import MobAppliedJobs from '../components/sharedComponents/MobAppliedBar'
 
 
 const profile = () => {
@@ -108,7 +108,7 @@ const profile = () => {
             <h3 className='text-lg font-semibold '>Skills</h3>
             <div className='flex gap-2  flex-wrap md:w-100 mt-1'>
               {
-                user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-600 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
+                user?.profile?.skills.length!==0 ? user?.profile?.skills.map((item,index)=>(<Badge className="bg-blue-50 border-blue-100 text-blue-600 w-25 text-md" key={index}>{item}</Badge>)) : <span>Na</span>
               }
             </div>
           </div>

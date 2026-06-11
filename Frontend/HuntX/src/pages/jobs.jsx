@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import Filter from '../components/smallComponents/filtersection'
+import React, { useState } from 'react'
+import Filter from '../components/smallComponents/Filtersection'
 import { Outlet } from 'react-router-dom'
-import jbanner from './../assets/jb1.png'
+import jbanner from '/jb1.png'
 
 const jobs = () => {
   const[filters,setFilters] = useState({

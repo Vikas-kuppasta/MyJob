@@ -14,7 +14,7 @@ import {
  } from '../ui/sidebar'
 import { BiBuilding,  BiPlus, BiSolidDashboard } from 'react-icons/bi'
 import { BiBriefcase } from 'react-icons/bi'
-import logo from '../../assets/logo1.png'
+import logo from '/logo1.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LogOut } from 'lucide-react'
 import { USER_API_END_POINT } from '@/constants/constant'

@@ -1,5 +1,5 @@
 import React from 'react'
-import recruiter from '../assets/recruiter2.png'
+import recruiter from '/recruiter2.png'
 import { FaArrowRightLong } from "react-icons/fa6";
 import { motion } from 'framer-motion';
 import { containerVariants, itemVariants } from '@/components/Animation/animate';

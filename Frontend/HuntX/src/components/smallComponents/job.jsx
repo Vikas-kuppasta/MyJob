@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import JobCard from '../smallComponents/jobCard'
+import JobCard from './JobCard'
 import useGetAllJob from '@/hooks/useGetAllJob'
 import { useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';

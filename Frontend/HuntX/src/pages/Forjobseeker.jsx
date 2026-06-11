@@ -1,5 +1,5 @@
 import React from 'react'
-import growth from '../assets/growth2.png'
+import growth from '/growth2.png'
 import { TbHandClick } from 'react-icons/tb';
 import { BiToggleRight } from 'react-icons/bi';
 import { useNavigate} from 'react-router-dom'

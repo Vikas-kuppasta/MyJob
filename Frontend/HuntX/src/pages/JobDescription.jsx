@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import banner from '../../public/banner.jpg'
-import userLogo from '../../public/Defaultuserlogo.png'
+import banner from '/banner.jpg'
+import userLogo from '/Defaultuserlogo.png'
 import { Button } from '@/components/ui/button'
 import { FaRegClock } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
@@ -58,7 +58,6 @@ const JobDescription = () => {
         
     },[])
 
-   
 
   return (
     <main className='w-full min-h-screen '>

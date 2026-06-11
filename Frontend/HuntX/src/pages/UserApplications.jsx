@@ -3,7 +3,7 @@ import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
 import React, { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
-import MobAppliedJobs from './../components/sharedComponents/mobAppliedBar'
+import MobAppliedJobs from '../components/sharedComponents/MobAppliedBar'
 
 const UserApplications = () => {
   useGetAppliedJobs();

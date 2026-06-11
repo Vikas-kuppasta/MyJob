@@ -1,5 +1,5 @@
 import React from 'react'
-import Title from '../smallComponents/title'
+import Title from '../smallComponents/Title'
 import { useNavigate } from 'react-router-dom';
 
 

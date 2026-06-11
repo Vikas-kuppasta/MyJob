@@ -1,7 +1,7 @@
 import useGetAllSavedJob from '@/hooks/useGetAllSavedjob';
 import React, { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
-import JobCard from '@/components/smallComponents/jobCard';
+import JobCard from '@/components/smallComponents/JobCard';
 import { useSelector } from 'react-redux';
 const UserSavedJobs = () => {
   useGetAllSavedJob();
