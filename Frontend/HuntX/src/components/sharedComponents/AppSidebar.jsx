@@ -48,7 +48,7 @@ const AppSidebar = () => {
    <Sidebar>
       <main className='bg-white h-full'>
         <SidebarHeader className={`border-b`}>
-         <Link to='/' > <img src={logo} className='max-sm:w-25 w-30' alt="" /> </Link>
+          <img src={logo} className='max-sm:w-25 w-30' alt="" />
         </SidebarHeader>
 
       <SidebarContent>
