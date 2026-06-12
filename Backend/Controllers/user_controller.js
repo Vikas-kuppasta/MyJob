@@ -107,6 +107,7 @@ export const logout = async(req,res)=>{
 
 export const updateProfile = async (req, res) => {
     try {
+        
         const { firstname, bio, email, skills } = req.body;
         const userId = req.id;
 
@@ -123,12 +124,20 @@ export const updateProfile = async (req, res) => {
         
         if (firstname) user.firstname = firstname;
         if (email) user.email = email;
+        if (!user.profile) {
+            user.profile = {};
+            }
+
         if (bio) user.profile.bio = bio;
 
         if (skills) {
-            const skillsArray = skills.split(",");
+            const skillsArray = skills
+            .split(",")
+            .map(skill => skill.trim())
+            .filter(skill => skill);
+
             user.profile.skills = skillsArray;
-        }
+            }
 
         await user.save();
 
