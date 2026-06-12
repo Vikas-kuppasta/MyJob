@@ -34,12 +34,11 @@ const companySchema = new mongoose.Schema({
         type:String,
     },
     companyProfile:{
-        companyLogo:{
-                    type:String,
-                },
-        companyBanner:{
-                    type:String,
-                }
+        companyLogo: String,
+        companyLogoPublicId: String,
+
+        companyBanner: String,
+        companyBannerPublicId: String
     },
     userId:{
         type:mongoose.Schema.Types.ObjectId,

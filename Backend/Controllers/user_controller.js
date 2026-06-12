@@ -2,6 +2,7 @@ import {User} from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { uploadToCloudinary } from '../utils/helper.js';
+import cloudinary from '../utils/cloudinary.js';
 
 export const register = async(req,res)=>{
     try {
@@ -167,24 +168,6 @@ export const updateProfileImages = async(req,res)=>{
         const profile = req.files?.profile?.[0];
         const banner = req.files?.banner?.[0];
         
-        let profileUrl="";
-        let bannerUrl="";
-
-        if(profile){
-            const result = await uploadToCloudinary(
-                profile.buffer,
-                "Profile-images"
-            );
-            profileUrl = result.secure_url;
-        }
-        if(banner){
-            const result = await uploadToCloudinary(
-                banner.buffer,
-                "Banner-images"
-            );
-            bannerUrl = result.secure_url;
-        }
-
         const user = await User.findById(userId);
         if(!user){
             return res.status(404).json({
@@ -192,6 +175,43 @@ export const updateProfileImages = async(req,res)=>{
                 success:false
             });
         }
+        let profileUrl="";
+        let bannerUrl="";
+
+        if(profile){
+
+            if(user.profile.profilePhotoPublicId){
+            await cloudinary.uploader.destroy(
+            user.profile.profilePhotoPublicId
+            );
+        }
+
+            const result = await uploadToCloudinary(
+            profile.buffer,
+            "Profile-images"
+        );
+
+            profileUrl = result.secure_url;
+            user.profile.profilePhotoPublicId = result.public_id;
+        }
+
+        if(banner){
+
+            if(user.profile.profileBannerPublicId){
+                await cloudinary.uploader.destroy(
+                user.profile.profileBannerPublicId
+            );
+            }
+
+            const result = await uploadToCloudinary(
+            banner.buffer,
+            "Banner-images"
+            );
+
+            bannerUrl = result.secure_url;
+            user.profile.profileBannerPublicId = result.public_id;
+        }
+
         if(profileUrl){
             user.profile.profilePhoto = profileUrl;
         }

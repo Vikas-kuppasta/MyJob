@@ -1,5 +1,5 @@
 import {Job} from '../models/jobmodel.js';
-import { uploadToCloudinary } from '../utils/helper.js';
+
 
 export const postjob = async(req,res)=>{
 try {

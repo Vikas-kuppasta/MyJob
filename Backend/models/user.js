@@ -25,7 +25,9 @@ const userSchema =  new mongoose.Schema({
         resume:{type:String},
         resumeOriginalname:{type:String},
         profilePhoto:{type:String,default:""},
-        profileBanner:{type:String,default:""}
+        profilePhotoPublicId:{type:String,default:""},
+        profileBanner:{type:String,default:""},
+        profileBannerPublicId:{type:String,default:""}
     }
 },{timestamps:true})
 
