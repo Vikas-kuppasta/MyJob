@@ -16,7 +16,7 @@ const UpdateProfile = ({open,setOpen}) => {
         firstname:user?.firstname,
         email:user?.email,
         bio:user?.profile?.bio,
-        skills:user?.profile?.skills?.map(skill=>skill),
+        skills:user?.profile?.skills?.join(", ") || ""
     });
     
 
