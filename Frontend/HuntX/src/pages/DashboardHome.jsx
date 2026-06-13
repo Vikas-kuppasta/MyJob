@@ -37,12 +37,12 @@ const DashboardHome = () => {
         </div>
 
         <div className='max-sm:hidden flex gap-3 items-center'>
-          <Button onClick={()=>navigate("postcompany")} className="bg-white text-gray-600">
+          <Button onClick={()=>navigate("postcompany")} className="bg-white cursor-pointer hover:bg-white text-gray-600">
             <BiBuilding className='mr-2 h-4 w-4'/>
             Add Company
           </Button>
 
-          <Button onClick={()=>navigate("postjob")} className="bg-blue-600 text-white">
+          <Button onClick={()=>navigate("postjob")} className="bg-blue-600 cursor-pointer hover:bg-blue-600 text-white">
             <BiPlus className='mr-2 h-4 w-4'/>
             Post Job
           </Button>

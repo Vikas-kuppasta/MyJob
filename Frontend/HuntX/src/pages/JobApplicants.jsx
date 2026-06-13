@@ -135,7 +135,7 @@ const JobApplicants = () => {
               {/* Left */}
               <div className="flex gap-4">
                 <img
-                  src={applicant?.applicant.profile.profileBanner}
+                  src={applicant?.applicant.profile.profilePhoto}
                   alt=""
                   className="w-16 h-16 rounded-full object-cover"
                 />

@@ -5,4 +5,5 @@ export const upload = multer({storage}).fields([
     {name:"banner",maxCount:1},
     {name:"companyLogo",maxCount:1},
     {name:"companyBanner",maxCount:1},
+    {name:"resume",maxCount:1},
 ]);

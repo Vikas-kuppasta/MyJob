@@ -49,7 +49,7 @@ const ViewCompanyJobs = () => {
     }
 
     const { companyJobs } = useSelector((store) => store.job);
-    console.log(companyJobs);
+
 
     const totalJobs = companyJobs?.length || 0;
     const companyDescription =
@@ -81,7 +81,7 @@ const ViewCompanyJobs = () => {
                         </div>
                     </div>
 
-                    <Button className={`bg-blue-400 max-sm:hidden text-white`}>
+                    <Button onClick={()=>navigate("/adminDashboard/postjob")} className={`bg-blue-400 hover:bg-blue-400  max-sm:hidden text-white cursor-pointer`}>
                        + Post New Job
                     </Button>
 
