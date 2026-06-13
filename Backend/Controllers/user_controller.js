@@ -162,14 +162,14 @@ export const updateProfile = async (req, res) => {
             if (user.profile.resumePublicId) {
                 await cloudinary.uploader.destroy(
                     user.profile.resumePublicId,
-                    { resource_type: "raw" }
+                    { resource_type: "auto" }
                 );
             }
 
             const result = await uploadToCloudinary(
                 resume.buffer,
                 "Resumes",
-                { resource_type: "raw" }
+                { resource_type: "auto" }
             );
 
             user.profile.resume = result.secure_url;
