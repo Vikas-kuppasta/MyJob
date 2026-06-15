@@ -46,7 +46,7 @@ const JobDescription = () => {
                     withCredentials:true,
                 });
                 if(res.data.success){
-                    console.log(res.data.job);
+                    
                     dispatch(setSingleJob(res.data.job));
                     setIsApplied(res.data.job.application?.some(application=>application.applicant === user?._id))
                 }

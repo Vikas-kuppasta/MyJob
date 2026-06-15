@@ -1,7 +1,7 @@
 import { APPLICATION_API_END_POINT } from '@/constants/constant';
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,6 +16,7 @@ import { setApplicantJob } from '@/redux/getApplication';
 import { toast } from 'sonner';
 
 const JobApplicants = () => {
+  const navigate = useNavigate()
     const {jobApplicants} = useSelector(store=>store.application);
     const dispatch = useDispatch();
     
@@ -80,6 +81,8 @@ const JobApplicants = () => {
   }
   
   
+  
+  
   return (
 <>
     <div className="min-h-screen bg-slate-50 p-4 md:p-8">
@@ -115,14 +118,6 @@ const JobApplicants = () => {
         </div>
       </div>
 
-      {/* Search */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search applicants..."
-          className="w-full bg-white border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-primary"
-        />
-      </div>
 
       {/* Applicant Cards */}
       <div className="space-y-4">
@@ -181,7 +176,7 @@ const JobApplicants = () => {
                 </p>
 
                 <div className="flex gap-2">
-                  <Button variant="outline">
+                  <Button onClick={()=>{navigate(`/adminDashboard/myjobs/profile/${applicant.applicant._id}`)}} variant="outline">
                     View Profile
                   </Button>
 

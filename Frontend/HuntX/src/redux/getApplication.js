@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const application  = createSlice({
     name:"application",
     initialState:{
+        applicantProfile:{},
         appliedJobs:[],
         jobApplicants:{},
     },
@@ -13,8 +14,11 @@ const application  = createSlice({
         setApplicantJob:(state,action)=>{
             state.jobApplicants = action.payload;
         },
+        setApplicantProfile:(state,action)=>{
+            state.applicantProfile = action.payload;
+        },
     }
 });
 
-export const {setAppliedJob,setApplicantJob} = application.actions;
+export const {setAppliedJob,setApplicantJob,setApplicantProfile} = application.actions;
 export default application.reducer;

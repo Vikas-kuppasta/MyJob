@@ -194,28 +194,29 @@ const UpdateProfile = ({ open, setOpen }) => {
         }
     }
 
-    const inputCls = 'w-full p-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 text-sm'
-    const labelCls = 'text-sm font-medium text-gray-700 mb-1 block'
+    // Smaller padding + text on mobile, normal on sm+
+    const inputCls = 'w-full px-2 py-1.5 sm:p-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm'
+    const labelCls = 'text-xs sm:text-sm font-medium text-gray-700 mb-0.5 block'
     const fieldCls = 'flex flex-col gap-1'
 
     return (
-        <Dialog open={open}>
+        <Dialog onOpenChange={setOpen} open={open}>
             <DialogContent
-                className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-0"
+                className="w-[calc(100vw-24px)] sm:max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-0 rounded-xl"
                 onInteractOutside={() => setOpen(false)}
             >
-                <DialogHeader className="px-6 pt-6 pb-0">
-                    <DialogTitle className="text-xl font-semibold">Update Profile</DialogTitle>
+                <DialogHeader className="px-3 sm:px-6 pt-3 sm:pt-6 pb-0">
+                    <DialogTitle className="text-base sm:text-xl font-semibold">Update Profile</DialogTitle>
                 </DialogHeader>
 
                 {/* Tab Bar */}
-                <div className="flex border-b border-gray-200 px-6 mt-4 gap-1 overflow-x-auto">
+                <div className="flex border-b border-gray-200 px-2 sm:px-6 mt-3 sm:mt-4 gap-0.5 overflow-x-auto">
                     {TABS.map(tab => (
                         <button
                             key={tab}
                             type="button"
                             onClick={() => setActiveTab(tab)}
-                            className={`px-4 py-2 text-sm font-medium whitespace-nowrap rounded-t-md transition-colors
+                            className={`px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium whitespace-nowrap rounded-t-md transition-colors
                                 ${activeTab === tab
                                     ? 'border-b-2 border-blue-600 text-blue-600'
                                     : 'text-gray-500 hover:text-gray-700'
@@ -227,12 +228,12 @@ const UpdateProfile = ({ open, setOpen }) => {
                 </div>
 
                 <form onSubmit={submitHandler}>
-                    <div className="px-6 py-5 flex flex-col gap-5">
+                    <div className="px-3 sm:px-6 py-3 sm:py-5 flex flex-col gap-3 sm:gap-5">
 
                         {/* ── BASIC ── */}
                         {activeTab === 'Basic' && (
                             <>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                                     <div className={fieldCls}>
                                         <label className={labelCls}>Full Name</label>
                                         <input name="firstname" value={input.firstname} onChange={handleInput} className={inputCls} placeholder="John Doe" />
@@ -263,7 +264,12 @@ const UpdateProfile = ({ open, setOpen }) => {
 
                                 <div className={fieldCls}>
                                     <label className={labelCls}>Resume <span className="text-gray-400 font-normal">(PDF)</span></label>
-                                    <input type="file" accept=".pdf,.doc,.docx" onChange={e => setResumeFile(e.target.files[0])} className="text-sm text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded file:border file:border-gray-300 file:text-sm file:bg-gray-50 file:cursor-pointer" />
+                                    <input
+                                        type="file"
+                                        accept=".pdf,.doc,.docx"
+                                        onChange={e => setResumeFile(e.target.files[0])}
+                                        className="text-xs sm:text-sm text-gray-500 file:mr-2 sm:file:mr-3 file:py-1 file:px-2 sm:file:px-3 file:rounded file:border file:border-gray-300 file:text-xs sm:file:text-sm file:bg-gray-50 file:cursor-pointer"
+                                    />
                                     {user?.profile?.resume && (
                                         <p className="text-xs text-gray-400 mt-1">
                                             Current: <a href={user.profile.resume} target="_blank" rel="noreferrer" className="text-blue-500 underline">{user.profile.resumeOriginalname || 'View resume'}</a>
@@ -275,7 +281,7 @@ const UpdateProfile = ({ open, setOpen }) => {
 
                         {/* ── SOCIAL ── */}
                         {activeTab === 'Social' && (
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2 sm:gap-4">
                                 <div className={fieldCls}>
                                     <label className={labelCls}>GitHub URL</label>
                                     <input name="github" value={input.github} onChange={handleInput} className={inputCls} placeholder="https://github.com/username" />
@@ -293,19 +299,19 @@ const UpdateProfile = ({ open, setOpen }) => {
 
                         {/* ── EDUCATION ── */}
                         {activeTab === 'Education' && (
-                            <div className="flex flex-col gap-5">
+                            <div className="flex flex-col gap-3 sm:gap-5">
                                 {education.map((edu, i) => (
-                                    <div key={i} className="border border-gray-200 rounded-lg p-4 relative flex flex-col gap-3">
+                                    <div key={i} className="border border-gray-200 rounded-lg p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3">
                                         <div className="flex justify-between items-center">
-                                            <span className="text-sm font-medium text-gray-600">Education #{i + 1}</span>
+                                            <span className="text-xs sm:text-sm font-medium text-gray-600">Education #{i + 1}</span>
                                             {education.length > 1 && (
                                                 <button type="button" onClick={() => removeItem(setEducation, education, i)} className="text-red-400 hover:text-red-600">
-                                                    <Trash2 size={16} />
+                                                    <Trash2 size={14} />
                                                 </button>
                                             )}
                                         </div>
-                                        <div className="grid grid-cols-2 gap-3">
-                                            <div className={`${fieldCls} col-span-2`}>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                                            <div className={`${fieldCls} sm:col-span-2`}>
                                                 <label className={labelCls}>College / University</label>
                                                 <input value={edu.college} onChange={e => handleListChange(setEducation, education, i, 'college', e.target.value)} className={inputCls} placeholder="MIT" />
                                             </div>
@@ -328,26 +334,26 @@ const UpdateProfile = ({ open, setOpen }) => {
                                         </div>
                                     </div>
                                 ))}
-                                <button type="button" onClick={() => addItem(setEducation, emptyEducation)} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium self-start">
-                                    <Plus size={16} /> Add Education
+                                <button type="button" onClick={() => addItem(setEducation, emptyEducation)} className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium self-start">
+                                    <Plus size={14} /> Add Education
                                 </button>
                             </div>
                         )}
 
                         {/* ── EXPERIENCE ── */}
                         {activeTab === 'Experience' && (
-                            <div className="flex flex-col gap-5">
+                            <div className="flex flex-col gap-3 sm:gap-5">
                                 {experience.map((exp, i) => (
-                                    <div key={i} className="border border-gray-200 rounded-lg p-4 flex flex-col gap-3">
+                                    <div key={i} className="border border-gray-200 rounded-lg p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3">
                                         <div className="flex justify-between items-center">
-                                            <span className="text-sm font-medium text-gray-600">Experience #{i + 1}</span>
+                                            <span className="text-xs sm:text-sm font-medium text-gray-600">Experience #{i + 1}</span>
                                             {experience.length > 1 && (
                                                 <button type="button" onClick={() => removeItem(setExperience, experience, i)} className="text-red-400 hover:text-red-600">
-                                                    <Trash2 size={16} />
+                                                    <Trash2 size={14} />
                                                 </button>
                                             )}
                                         </div>
-                                        <div className="grid grid-cols-2 gap-3">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                                             <div className={fieldCls}>
                                                 <label className={labelCls}>Company</label>
                                                 <input value={exp.company} onChange={e => handleListChange(setExperience, experience, i, 'company', e.target.value)} className={inputCls} placeholder="Google" />
@@ -361,36 +367,36 @@ const UpdateProfile = ({ open, setOpen }) => {
                                                 <input type="date" value={exp.startDate} onChange={e => handleListChange(setExperience, experience, i, 'startDate', e.target.value)} className={inputCls} />
                                             </div>
                                             <div className={fieldCls}>
-                                                <label className={labelCls}>End Date <span className="text-gray-400 font-normal">(leave blank if current)</span></label>
+                                                <label className={labelCls}>End Date <span className="text-gray-400 font-normal">(blank if current)</span></label>
                                                 <input type="date" value={exp.endDate} onChange={e => handleListChange(setExperience, experience, i, 'endDate', e.target.value)} className={inputCls} />
                                             </div>
-                                            <div className={`${fieldCls} col-span-2`}>
+                                            <div className={`${fieldCls} sm:col-span-2`}>
                                                 <label className={labelCls}>Description</label>
                                                 <textarea rows={3} value={exp.description} onChange={e => handleListChange(setExperience, experience, i, 'description', e.target.value)} className={inputCls} placeholder="Describe your role and achievements..." />
                                             </div>
                                         </div>
                                     </div>
                                 ))}
-                                <button type="button" onClick={() => addItem(setExperience, emptyExperience)} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium self-start">
-                                    <Plus size={16} /> Add Experience
+                                <button type="button" onClick={() => addItem(setExperience, emptyExperience)} className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium self-start">
+                                    <Plus size={14} /> Add Experience
                                 </button>
                             </div>
                         )}
 
                         {/* ── PROJECTS ── */}
                         {activeTab === 'Projects' && (
-                            <div className="flex flex-col gap-5">
+                            <div className="flex flex-col gap-3 sm:gap-5">
                                 {projects.map((proj, i) => (
-                                    <div key={i} className="border border-gray-200 rounded-lg p-4 flex flex-col gap-3">
+                                    <div key={i} className="border border-gray-200 rounded-lg p-2.5 sm:p-4 flex flex-col gap-2 sm:gap-3">
                                         <div className="flex justify-between items-center">
-                                            <span className="text-sm font-medium text-gray-600">Project #{i + 1}</span>
+                                            <span className="text-xs sm:text-sm font-medium text-gray-600">Project #{i + 1}</span>
                                             {projects.length > 1 && (
                                                 <button type="button" onClick={() => removeItem(setProjects, projects, i)} className="text-red-400 hover:text-red-600">
-                                                    <Trash2 size={16} />
+                                                    <Trash2 size={14} />
                                                 </button>
                                             )}
                                         </div>
-                                        <div className="flex flex-col gap-3">
+                                        <div className="flex flex-col gap-2 sm:gap-3">
                                             <div className={fieldCls}>
                                                 <label className={labelCls}>Project Title</label>
                                                 <input value={proj.title} onChange={e => handleListChange(setProjects, projects, i, 'title', e.target.value)} className={inputCls} placeholder="Job Portal App" />
@@ -403,7 +409,7 @@ const UpdateProfile = ({ open, setOpen }) => {
                                                 <label className={labelCls}>Tech Stack <span className="text-gray-400 font-normal">(comma-separated)</span></label>
                                                 <input value={proj.techStack} onChange={e => handleListChange(setProjects, projects, i, 'techStack', e.target.value)} className={inputCls} placeholder="React, Node.js, MongoDB" />
                                             </div>
-                                            <div className="grid grid-cols-2 gap-3">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                                                 <div className={fieldCls}>
                                                     <label className={labelCls}>GitHub Link</label>
                                                     <input value={proj.githubLink} onChange={e => handleListChange(setProjects, projects, i, 'githubLink', e.target.value)} className={inputCls} placeholder="https://github.com/..." />
@@ -416,28 +422,28 @@ const UpdateProfile = ({ open, setOpen }) => {
                                         </div>
                                     </div>
                                 ))}
-                                <button type="button" onClick={() => addItem(setProjects, emptyProject)} className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium self-start">
-                                    <Plus size={16} /> Add Project
+                                <button type="button" onClick={() => addItem(setProjects, emptyProject)} className="flex items-center gap-1.5 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium self-start">
+                                    <Plus size={14} /> Add Project
                                 </button>
                             </div>
                         )}
 
                     </div>
 
-                    <DialogFooter className="px-6 pb-6">
+                    <DialogFooter className="px-3 sm:px-6 pb-3 sm:pb-6 flex flex-row justify-end gap-2">
                         <button
                             type="button"
                             onClick={() => setOpen(false)}
-                            className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 mr-2"
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 px-6 py-2 cursor-pointer text-white text-sm rounded-md flex items-center gap-2"
+                            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 px-4 sm:px-6 py-1.5 sm:py-2 cursor-pointer text-white text-xs sm:text-sm rounded-md flex items-center gap-2"
                         >
-                            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+                            {loading && <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />}
                             {loading ? 'Saving...' : 'Save Changes'}
                         </button>
                     </DialogFooter>

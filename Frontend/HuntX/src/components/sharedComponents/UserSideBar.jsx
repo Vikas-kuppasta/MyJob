@@ -9,7 +9,7 @@ const UserSideBar = () => {
     const navigate = useNavigate();
   return (
 <>
-    <main className='w-50 bg-white overflow-hidden border rounded-md max-sm:hidden   '>
+    <main className='w-50 h-100 bg-white overflow-hidden border rounded-md max-sm:hidden   '>
         <span onClick={()=>(navigate("/profile"))} className={`${location.pathname==="/profile" ? "bg-blue-100 text-blue-600 " : "text-gray-500"} flex h-10 cursor-pointer items-center text-sm `}>
             <div className={` w-1 h-full ${location.pathname==="/profile" ? "bg-blue-500" : null} `}></div>
             <div className={`flex mx-auto font-medium  gap-4 items-center`}>

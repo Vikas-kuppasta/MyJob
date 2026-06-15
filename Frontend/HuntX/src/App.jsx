@@ -26,6 +26,7 @@ import ViewCompanyJobs from './pages/ViewCompanyJobs'
 import EditCompany from './pages/EditCompany'
 import EditJob from './pages/EditJob'
 import ProtectedUser from './admin/ProtectedUser'
+import ViewProfile from './pages/ViewProfile'
 function App() {
 
 
@@ -59,6 +60,7 @@ function App() {
         <Route path='mycompanies/job/:id' element={<EditCompany/>}/>
         <Route path='postcompany' element={<PostCompany/>}/>
         <Route path='myjobs' element={<MyJobs/>}/>
+        <Route path='myjobs/profile/:id' element={<ViewProfile/>}/>
         <Route path='myjobs/:id' element={<EditJob/>}/>
         <Route path='postjob' element={<Postjobs/>}/>
         <Route path='myjobs/applicants/:id' element={<JobApplicants/>}/>
