@@ -1,5 +1,6 @@
 import {Application} from '../models/application.js';
 import { Job } from '../models/jobmodel.js';
+import { User } from '../models/user.js';
 
 export const applyjob = async(req,res)=>{
     try {
@@ -122,6 +123,35 @@ export const updateStatus = async(req,res)=>{
 
         return res.status(200).json({
             message:"Status updated successfully",
+            success:true
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getProfileById= async(req,res)=>{
+    try {
+        const applicantId =  req.params.id;
+        
+        
+        if(!applicantId){
+            res.status(400).json({
+                message:"something wrong",
+                success:false,
+            });
+        };
+
+        const applicant = await User.findById(applicantId)
+        if(!applicant){
+            res.status(400).json({
+                message:"applicant not found",
+                success:false
+            })
+        };
+
+        res.status(200).json({
+            applicant,
             success:true
         })
     } catch (error) {

@@ -1,7 +1,7 @@
 import { User } from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { uploadToCloudinary } from '../utils/helper.js';
+import {  uploadToCloudinary } from '../utils/helper.js';
 import cloudinary from '../utils/cloudinary.js';
 
 export const register = async (req, res) => {
@@ -130,19 +130,19 @@ export const updateProfile = async (req, res) => {
             return res.status(404).json({ message: "User not found", success: false });
         }
 
-        // ── Top-level fields ──
+       
         if (firstname) user.firstname = firstname;
         if (email) user.email = email;
 
-        // ── Ensure profile object exists ──
+        
         if (!user.profile) user.profile = {};
 
-        // ── Basic profile fields ──
+        
         if (bio !== undefined) user.profile.bio = bio;
         if (phone !== undefined) user.profile.phone = phone;
         if (location !== undefined) user.profile.location = location;
 
-        // ── Skills (comma-separated string → array) ──
+        
         if (skills !== undefined) {
             user.profile.skills = skills
                 .split(',')
@@ -150,34 +150,40 @@ export const updateProfile = async (req, res) => {
                 .filter(Boolean);
         }
 
-        // ── Social links ──
+        
         if (github !== undefined) user.profile.github = github;
         if (linkedin !== undefined) user.profile.linkedin = linkedin;
         if (portfolio !== undefined) user.profile.portfolio = portfolio;
 
-        // ── Resume (file upload via multer/cloudinary) ──
+        
         const resume = req.files?.resume?.[0];
 
         if (resume) {
+           
+            
             if (user.profile.resumePublicId) {
                 await cloudinary.uploader.destroy(
                     user.profile.resumePublicId,
-                    { resource_type: "auto" }
+                    
                 );
             }
 
             const result = await uploadToCloudinary(
                 resume.buffer,
                 "Resumes",
-                { resource_type: "auto" }
+                { resource_type: "auto",
+                    // format: resume.mimetype.split("/")[1],
+                 }
             );
+            ;
+
 
             user.profile.resume = result.secure_url;
             user.profile.resumePublicId = result.public_id;
             user.profile.resumeOriginalname = resume.originalname;
         }
 
-        // ── Nested arrays (sent as JSON strings from FormData) ──
+        
         if (education) {
             const parsed = typeof education === 'string' ? JSON.parse(education) : education;
             user.profile.education = parsed.map(e => ({
