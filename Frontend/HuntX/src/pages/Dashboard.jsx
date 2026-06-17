@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom'
 const Dashboard = () => {
   return (
   <>
+  {/* v */}
     <Navbar />
     <SidebarProvider >
        <main className=' flex  min-h-screen  w-full'>
